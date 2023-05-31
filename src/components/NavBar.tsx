@@ -1,5 +1,4 @@
 import { HStack, Box, Link } from '@chakra-ui/react'
-import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 const NavBar = () => {
