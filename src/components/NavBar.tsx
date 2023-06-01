@@ -24,7 +24,7 @@ const NavBar = () => {
           _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
           _hover={{ textDecoration: 'none' }}
         >
-          Sign In
+          Sign in
         </Link>
         <Link
           to='/register'
@@ -33,7 +33,7 @@ const NavBar = () => {
           _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
           _hover={{ textDecoration: 'none' }}
         >
-          Sign Up
+          Sign up
         </Link>
       </HStack>
     </HStack>
