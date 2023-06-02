@@ -21,7 +21,6 @@ const SignInForm = () => {
   } = useForm<FormData>({ resolver: zodResolver(schema) })
 
   const onSubmit = (data: FieldValues) => {
-    console.log(errors)
     console.log(data)
   }
   return (
