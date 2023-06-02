@@ -1,4 +1,4 @@
-import { Flex, Heading, Stack, Link } from '@chakra-ui/react'
+import { Heading, Stack, Link } from '@chakra-ui/react'
 import SignInForm from '../components/SignInForm'
 import { NavLink } from 'react-router-dom'
 
