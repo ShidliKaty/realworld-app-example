@@ -2,6 +2,7 @@ import { Stack, Input, Button, Text } from '@chakra-ui/react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useSignUp } from '../hooks/useSignUp'
 
 const schema = z
   .object({
@@ -24,13 +25,24 @@ const schema = z
 type FormData = z.infer<typeof schema>
 
 const SignUpForm = () => {
+  const signUp = useSignUp()
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<FormData>({ resolver: zodResolver(schema) })
 
-  const onSubmit = (data: FieldValues) => console.log(data)
+  const onSubmit = (data: FormData) => {
+    const { name, email, password } = data
+    console.log(data)
+    signUp.mutate({
+      user: {
+        username: name,
+        email,
+        password,
+      },
+    })
+  }
 
   return (
     <Stack
@@ -40,6 +52,9 @@ const SignUpForm = () => {
       alignItems={'flex-end'}
       minW={'540px'}
     >
+      {signUp.error?.message.includes('status code 422') ? (
+        <Text color={'red.600'}>name has already been taken</Text>
+      ) : null}
       <Input
         {...register('name')}
         id='name'
@@ -47,6 +62,7 @@ const SignUpForm = () => {
         size={'lg'}
         type='text'
         placeholder='Username'
+        borderColor={signUp.error ? 'red.600' : 'current'}
       />
       {errors.name && <Text color={'red.600'}>{errors.name.message}</Text>}
 
