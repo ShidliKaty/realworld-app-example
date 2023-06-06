@@ -2,7 +2,7 @@ import { Stack, Input, Button, Text } from '@chakra-ui/react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useAuth } from '../hooks/useAuth'
+import { useLogIn } from '../hooks/useAuth'
 
 const schema = z.object({
   email: z
@@ -15,7 +15,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 
 const SignInForm = () => {
-  const logIn = useAuth()
+  const logIn = useLogIn()
   const {
     register,
     handleSubmit,
