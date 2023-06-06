@@ -2,6 +2,7 @@ import { Stack, Input, Button, Text } from '@chakra-ui/react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useAuth } from '../hooks/useAuth'
 
 const schema = z.object({
   email: z
@@ -14,14 +15,17 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 
 const SignInForm = () => {
+  const logIn = useAuth()
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<FormData>({ resolver: zodResolver(schema) })
 
-  const onSubmit = (data: FieldValues) => {
-    console.log(data)
+  const onSubmit = (data: FormData) => {
+    logIn.mutate({
+      user: data,
+    })
   }
   return (
     <Stack
@@ -31,6 +35,9 @@ const SignInForm = () => {
       alignItems={'flex-end'}
       minW={'540px'}
     >
+      {logIn.error?.message.includes('status code 403') ? (
+        <Text color={'red.600'}>email or password is invalid</Text>
+      ) : null}
       <Input
         {...register('email')}
         id='email'
