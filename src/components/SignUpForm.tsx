@@ -62,7 +62,7 @@ const SignUpForm = () => {
         size={'lg'}
         type='text'
         placeholder='Username'
-        borderColor={signUp.error ? 'red.600' : 'current'}
+        borderColor={signUp.error ? 'red.600' : 'inherit'}
       />
       {errors.name && <Text color={'red.600'}>{errors.name.message}</Text>}
 

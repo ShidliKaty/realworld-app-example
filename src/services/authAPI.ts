@@ -6,13 +6,12 @@ export interface LoginUser {
     password: string;
 }
 
-export interface User {
+export interface ReceivedUser {
     email: string;
     token: string;
     username: string;
     bio: string;
-    image: string;
-        
+    image: string;   
 }
 
 export interface NewUser {
@@ -29,11 +28,11 @@ export interface LoginRequest {
 }
 
 export interface ILoginResponse {
-    user: User
+    user: ReceivedUser
 }
 
 export interface RegisterResponse {
-    user: User
+    user: ReceivedUser
 }
 
 export const authAPI = axios.create({

@@ -28,9 +28,12 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "7.43",
     "react-router-dom": "^6.10.0",
-    "zod": "^3.20.6"
+    "simple-zustand-devtools": "^1.1.0",
+    "zod": "^3.20.6",
+    "zustand": "^4.3.7"
   },
   "devDependencies": {
+    "@types/node": "^20.2.5",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
