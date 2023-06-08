@@ -5,7 +5,7 @@ import NavBar from '../components/NavBar'
 const ErrorPage = () => {
   const error = useRouteError()
   return (
-    <Box px='134px'>
+    <Box>
       <NavBar />
       <Box padding={2}>
         <Heading>Oops</Heading>
