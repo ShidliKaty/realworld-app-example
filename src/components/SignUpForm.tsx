@@ -1,8 +1,8 @@
 import { Stack, Input, Button, Text } from '@chakra-ui/react'
-import { FieldValues, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useSignUp } from '../hooks/useSignUp'
+import { ErrorsResponseData, useSignUp } from '../hooks/useSignUp'
 
 const schema = z
   .object({
@@ -25,17 +25,26 @@ const schema = z
 type FormData = z.infer<typeof schema>
 
 const SignUpForm = () => {
-  const signUp = useSignUp()
+  const onErrorHandler = (backendValErr: ErrorsResponseData) => {
+    if (backendValErr.email) {
+      setError('email', { message: backendValErr.email[0] })
+    }
+    if (backendValErr.username) {
+      setError('name', { message: backendValErr.username[0] })
+    }
+  }
+  const { mutate } = useSignUp(onErrorHandler)
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
+    setError,
   } = useForm<FormData>({ resolver: zodResolver(schema) })
 
-  const onSubmit = (data: FormData) => {
-    const { name, email, password } = data
-    console.log(data)
-    signUp.mutate({
+  const onSubmit = (inputData: FormData) => {
+    const { name, email, password } = inputData
+    mutate({
       user: {
         username: name,
         email,
@@ -52,9 +61,6 @@ const SignUpForm = () => {
       alignItems={'flex-end'}
       minW={'540px'}
     >
-      {signUp.error?.message.includes('status code 422') ? (
-        <Text color={'red.600'}>name has already been taken</Text>
-      ) : null}
       <Input
         {...register('name')}
         id='name'
@@ -62,7 +68,6 @@ const SignUpForm = () => {
         size={'lg'}
         type='text'
         placeholder='Username'
-        borderColor={signUp.error ? 'red.600' : 'inherit'}
       />
       {errors.name && <Text color={'red.600'}>{errors.name.message}</Text>}
 
