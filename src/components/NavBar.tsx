@@ -7,93 +7,107 @@ const LoginLinks = () => {
   const { user, logout } = useUserStore()
   return (
     <HStack spacing={4} alignItems={'center'} mx='auto'>
-      <Link
-        as={NavLink}
-        to='/'
-        color='gray.500'
-        _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
-        _hover={{ textDecoration: 'none' }}
-      >
-        Home
-      </Link>
-
-      <Link
-        as={NavLink}
-        to='/editor'
-        color='gray.500'
-        _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
-        _hover={{ textDecoration: 'none' }}
-      >
-        <EditIcon mx={1} mb={1} />
-        New Article
-      </Link>
-
-      <Link
-        to='/settings'
-        as={NavLink}
-        color='gray.500'
-        _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
-        _hover={{ textDecoration: 'none' }}
-      >
-        <SettingsIcon mx={1} mb={1} />
-        Settings
-      </Link>
-      <Link
-        to='/user'
-        as={NavLink}
-        color='gray.500'
-        _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
-        _hover={{ textDecoration: 'none' }}
-      >
-        <HStack>
-          <Image objectFit='cover' boxSize='26px' borderRadius='50%' src={user?.image} />
-          <Text>Profile</Text>
-        </HStack>
-      </Link>
-      <Link
-        onClick={() => logout()}
-        to='/login'
-        as={NavLink}
-        color='gray.500'
-        _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
-        _hover={{ textDecoration: 'none' }}
-      >
-        Log Out
-      </Link>
+      <li style={{ listStyleType: 'none' }}>
+        <Link
+          as={NavLink}
+          to='/'
+          color='gray.500'
+          _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
+          _hover={{ textDecoration: 'none' }}
+        >
+          Home
+        </Link>
+      </li>
+      <li style={{ listStyleType: 'none' }}>
+        <Link
+          as={NavLink}
+          to='/editor'
+          color='gray.500'
+          _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
+          _hover={{ textDecoration: 'none' }}
+        >
+          <EditIcon mx={1} mb={1} />
+          New Article
+        </Link>
+      </li>
+      <li style={{ listStyleType: 'none' }}>
+        <Link
+          to='/settings'
+          as={NavLink}
+          color='gray.500'
+          _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
+          _hover={{ textDecoration: 'none' }}
+        >
+          <SettingsIcon mx={1} mb={1} />
+          Settings
+        </Link>
+      </li>
+      <li style={{ listStyleType: 'none' }}>
+        <Link
+          to='/user'
+          as={NavLink}
+          color='gray.500'
+          _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
+          _hover={{ textDecoration: 'none' }}
+        >
+          <HStack>
+            <Image objectFit='cover' boxSize='26px' borderRadius='50%' src={user?.image} />
+            <Text>Profile</Text>
+          </HStack>
+        </Link>
+      </li>
+      <li style={{ listStyleType: 'none' }}>
+        <Link
+          onClick={() => logout()}
+          to='/login'
+          as={NavLink}
+          color='gray.500'
+          _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
+          _hover={{ textDecoration: 'none' }}
+        >
+          Log Out
+        </Link>
+      </li>
     </HStack>
   )
 }
 
 const Links = () => {
   return (
-    <HStack spacing={4} alignItems={'center'} mx='auto'>
-      <Link
-        as={NavLink}
-        to='/'
-        color='gray.500'
-        _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
-        _hover={{ textDecoration: 'none' }}
-      >
-        Home
-      </Link>
-      <Link
-        as={NavLink}
-        to='/login'
-        color='gray.500'
-        _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
-        _hover={{ textDecoration: 'none' }}
-      >
-        Sign in
-      </Link>
-      <Link
-        to='/register'
-        as={NavLink}
-        color='gray.500'
-        _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
-        _hover={{ textDecoration: 'none' }}
-      >
-        Sign up
-      </Link>
+    <HStack as={'ul'} spacing={4} alignItems={'center'} mx='auto'>
+      <li style={{ listStyleType: 'none' }}>
+        <Link
+          as={NavLink}
+          to='/'
+          color='gray.500'
+          _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
+          _hover={{ textDecoration: 'none' }}
+        >
+          Home
+        </Link>
+      </li>
+      <li style={{ listStyleType: 'none' }}>
+        <Link
+          as={NavLink}
+          to='/login'
+          color='gray.500'
+          _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
+          _hover={{ textDecoration: 'none' }}
+        >
+          Sign in
+        </Link>
+      </li>
+      <li style={{ listStyleType: 'none' }}>
+        <Link
+          to='/register'
+          as={NavLink}
+          color='gray.500'
+          _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
+          _hover={{ textDecoration: 'none' }}
+        >
+          Sign up
+        </Link>
+      </li>
     </HStack>
   )
 }
