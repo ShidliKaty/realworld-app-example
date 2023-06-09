@@ -1,4 +1,4 @@
-import { HStack, Box, Link, Image, Text } from '@chakra-ui/react'
+import { HStack, Box, Link, Image, Text, Container } from '@chakra-ui/react'
 import { NavLink } from 'react-router-dom'
 import { EditIcon, SettingsIcon } from '@chakra-ui/icons'
 import { useUserStore } from '../store'
@@ -101,12 +101,14 @@ const Links = () => {
 const NavBar = () => {
   const user = useUserStore((s) => s.user)
   return (
-    <HStack as={'nav'} padding='8px' justifyContent='space-between'>
-      <Box alignItems={'center'} fontSize={25} color='green' fontWeight='bold'>
-        conduit
-      </Box>
-      {user ? <LoginLinks /> : <Links />}
-    </HStack>
+    <Container minW='1110px'>
+      <HStack as={'nav'} py='8px' justifyContent='space-between'>
+        <Box alignItems={'center'} fontSize={25} color='green' fontWeight='bold'>
+          conduit
+        </Box>
+        {user ? <LoginLinks /> : <Links />}
+      </HStack>
+    </Container>
   )
 }
 
