@@ -4,6 +4,9 @@ import HomePage from './Pages/HomePage'
 import SignInPage from './Pages/SignInPage'
 import SignUpPage from './Pages/SignUpPage'
 import ErrorPage from './Pages/ErrorPage'
+import NewArticlePage from './Pages/NewArticlePage'
+import SettingsPage from './Pages/SettingsPage'
+import ProfilePage from './Pages/ProfilePage'
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +17,9 @@ export const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: 'login', element: <SignInPage /> },
       { path: 'register', element: <SignUpPage /> },
+      { path: 'editor', element: <NewArticlePage /> },
+      { path: 'settings', element: <SettingsPage /> },
+      { path: 'user', element: <ProfilePage /> },
     ],
   },
 ])

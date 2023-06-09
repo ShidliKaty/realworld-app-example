@@ -103,7 +103,6 @@ const SignUpForm = () => {
       <Button
         // isDisabled={!isValid}
         type={'submit'}
-        disabled={true}
         bg={'green'}
         color='white'
         w='20%'
