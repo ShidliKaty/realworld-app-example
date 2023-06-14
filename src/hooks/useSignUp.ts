@@ -1,8 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { RegisterInput, RegisterResponse, signUpUserFn } from "../services/authAPI";
+import { signUpUserFn } from "../services/authAPI";
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../store";
 import axios, {AxiosError} from 'axios'
+import { RegisterInput } from "../entities/RegisterInput";
+import { UserResponse } from "../entities/UserResponses";
 
 export type ErrorsResponseData = {
     email?: string[],
@@ -13,7 +15,7 @@ export const useSignUp = (onErrorHandler: (erros: ErrorsResponseData) => void) =
     const queryClient = useQueryClient()
     const login = useUserStore((s) => s.login)
     const navigate = useNavigate()
-    return useMutation<RegisterResponse, AxiosError<ErrorsResponseData> | Error, RegisterInput, unknown>(
+    return useMutation<UserResponse, AxiosError<ErrorsResponseData> | Error, RegisterInput, unknown>(
         (userData: RegisterInput) => signUpUserFn(userData), {
             onSuccess: (data) => {
                 queryClient.invalidateQueries({

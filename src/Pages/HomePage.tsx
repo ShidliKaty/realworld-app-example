@@ -26,7 +26,7 @@ const HomePage = () => {
           <Tabs>
             <TabList>
               {tabs.map((tab) => (
-                <Tab _selected={{ color: 'green' }} color='grey'>
+                <Tab key={tab} _selected={{ color: 'green' }} color='grey'>
                   {tab}
                 </Tab>
               ))}

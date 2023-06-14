@@ -1,12 +1,14 @@
 import { useMutation } from "@tanstack/react-query"
-import { ILoginResponse, LoginRequest, loginUserFn } from "../services/authAPI"
+import { loginUserFn } from "../services/authAPI"
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../store";
+import { LoginRequest } from "../entities/LoginRequest";
+import { UserResponse } from "../entities/UserResponses";
 
 export const useLogIn = () => {
     const login = useUserStore(s => s.login)
     const navigate = useNavigate();
-    return useMutation<ILoginResponse, Error, LoginRequest, unknown>(
+    return useMutation<UserResponse, Error, LoginRequest, unknown>(
         (userData: LoginRequest) => loginUserFn(userData), {
             onSuccess: (data) => {
                 console.log(data);
