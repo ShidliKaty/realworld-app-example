@@ -14,8 +14,10 @@ import {
 } from '@chakra-ui/react'
 import { ArticleCard } from '../components/ArticleCard'
 import Banner from '../components/Banner'
+import { useState } from 'react'
 
 const HomePage = () => {
+  const [tabs, setTabs] = useState(['Global Feed'])
   return (
     <>
       <Banner />
@@ -23,18 +25,18 @@ const HomePage = () => {
         <HStack spacing={8} alignItems='flex-start' pt={5}>
           <Tabs>
             <TabList>
-              <Tab _selected={{ color: 'green' }} color='grey'>
-                My Feed
-              </Tab>
-              <Tab _selected={{ color: 'green' }} color='grey'>
-                Global Feed
-              </Tab>
+              {tabs.map((tab) => (
+                <Tab _selected={{ color: 'green' }} color='grey'>
+                  {tab}
+                </Tab>
+              ))}
             </TabList>
             <TabIndicator mt='-1.5px' height='2px' bg='green' borderRadius='1px' />
             <TabPanels>
               <TabPanel>
                 <ArticleCard />
-                <ArticleCard />
+              </TabPanel>
+              <TabPanel>
                 <ArticleCard />
               </TabPanel>
               <TabPanel>

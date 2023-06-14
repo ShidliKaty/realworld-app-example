@@ -42,8 +42,8 @@ const ProfilePage = () => {
           </Button>
         </Container>
       </Box>
-      <Container minW='920px'>
-        <Tabs pt={5}>
+      <Container minW='920px' py={5}>
+        <Tabs>
           <TabList>
             <Tab _selected={{ color: 'green' }} color='grey'>
               My Articles
