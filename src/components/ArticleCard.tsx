@@ -1,5 +1,6 @@
-import { Avatar, Box, Button, Flex, HStack, Heading, Tag, Text } from '@chakra-ui/react'
+import { Avatar, Box, Button, Flex, HStack, Heading, Icon, Tag, Text } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
+import { AiFillHeart } from 'react-icons/ai'
 
 export const ArticleCard = () => {
   return (
@@ -16,8 +17,15 @@ export const ArticleCard = () => {
             </Text>
           </Box>
         </Flex>
-        <Button size='sm' bg='green' color='white'>
-          0
+        <Button
+          size='sm'
+          bg='green'
+          color='white'
+          _hover={{
+            bg: 'green.500',
+          }}
+        >
+          <Icon mr={1} as={AiFillHeart} />0
         </Button>
       </HStack>
       <Link to={'/'}>
