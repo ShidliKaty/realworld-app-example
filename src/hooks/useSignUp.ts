@@ -5,6 +5,7 @@ import { useUserStore } from "../store";
 import axios, {AxiosError} from 'axios'
 import { RegisterInput } from "../entities/RegisterInput";
 import { UserResponse } from "../entities/UserResponses";
+import { setToken } from "./useLocalStorage";
 
 export type ErrorsResponseData = {
     email?: string[],
@@ -13,7 +14,7 @@ export type ErrorsResponseData = {
 
 export const useSignUp = (onErrorHandler: (erros: ErrorsResponseData) => void) => {
     const queryClient = useQueryClient()
-    const login = useUserStore((s) => s.login)
+    const setUser = useUserStore((s) => s.setUser)
     const navigate = useNavigate()
     return useMutation<UserResponse, AxiosError<ErrorsResponseData> | Error, RegisterInput, unknown>(
         (userData: RegisterInput) => signUpUserFn(userData), {
@@ -21,9 +22,10 @@ export const useSignUp = (onErrorHandler: (erros: ErrorsResponseData) => void) =
                 queryClient.invalidateQueries({
                     queryKey: ['users']
                 }),
-                login(data.user),
+                setUser(data.user);
+                setToken(data.user.token);
+                navigate('/');
                 console.log(data)
-                navigate('/')
             },
             onError: (error) => {
                 if (axios.isAxiosError(error) && error.response &&  error.response.status === 422)  {

@@ -9,13 +9,13 @@ import { setToken } from "./useLocalStorage";
 
 export const useLogIn = () => {
    
-    const login = useUserStore(s => s.login)
+    const setUser = useUserStore(s => s.setUser)
     const navigate = useNavigate();
     return useMutation<UserResponse, Error, LoginRequest, unknown>(
         (userData: LoginRequest) => loginUserFn(userData), {
             onSuccess: (data) => {
                 console.log(data);
-                login(data.user)
+                setUser(data.user)
                 setToken(data.user.token)
                 navigate('/');
               },

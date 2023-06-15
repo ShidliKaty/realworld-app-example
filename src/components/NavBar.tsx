@@ -2,9 +2,16 @@ import { HStack, Box, Link, Image, Text, Container } from '@chakra-ui/react'
 import { NavLink } from 'react-router-dom'
 import { EditIcon, SettingsIcon } from '@chakra-ui/icons'
 import { useUserStore } from '../store'
+import { removeToken } from '../hooks/useLocalStorage'
 
 const LoginLinks = () => {
-  const { user, logout } = useUserStore()
+  const { user, deleteUser } = useUserStore()
+
+  const logout = () => {
+    deleteUser()
+    removeToken('token')
+  }
+
   return (
     <HStack spacing={4} alignItems={'center'} mx='auto'>
       <li style={{ listStyleType: 'none' }}>

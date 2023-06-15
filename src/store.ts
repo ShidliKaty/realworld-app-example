@@ -10,15 +10,15 @@ interface User {
 
 interface UserStore {
     user: User | null;
-    login: (user: User | null) => void;
-    logout: () => void;
+    setUser: (user: User | null) => void;
+    deleteUser: () => void;
     // isLogIn: () => boolean;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
     user: null,
-    login: (user) => set((store) => ({...store, user}) ),
-    logout: () => set((store) => ({...store, user: null})),
+    setUser: (user) => set((store) => ({...store, user}) ),
+    deleteUser: () => set((store) => ({...store, user: null})),
     // isLogIn: () => !!get().user //Boolean(get().user)
 }))
 
