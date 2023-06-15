@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../store";
 import { LoginRequest } from "../entities/LoginRequest";
 import { UserResponse } from "../entities/UserResponses";
+import { setToken } from "./useLocalStorage";
+
 
 export const useLogIn = () => {
+   
     const login = useUserStore(s => s.login)
     const navigate = useNavigate();
     return useMutation<UserResponse, Error, LoginRequest, unknown>(
@@ -13,6 +16,7 @@ export const useLogIn = () => {
             onSuccess: (data) => {
                 console.log(data);
                 login(data.user)
+                setToken(data.user.token)
                 navigate('/');
               },
             onError: (error) => {

@@ -4,7 +4,7 @@ import { LoginRequest } from '../entities/LoginRequest';
 import { UserResponse } from '../entities/UserResponses';
 
 
-export const authAPI = axios.create({
+const authAPI = axios.create({
     baseURL: 'https://api.realworld.io/api'
 })
 
