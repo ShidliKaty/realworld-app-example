@@ -6,15 +6,12 @@ import {
   TabIndicator,
   TabPanels,
   TabPanel,
-  Text,
   HStack,
-  Box,
-  Tag,
-  Wrap,
 } from '@chakra-ui/react'
 import { ArticleCard } from '../components/ArticleCard'
 import Banner from '../components/Banner'
 import { useState } from 'react'
+import { TagsBox } from '../components/TagsBox'
 
 const HomePage = () => {
   const [tabs, setTabs] = useState(['Global Feed'])
@@ -44,22 +41,7 @@ const HomePage = () => {
               </TabPanel>
             </TabPanels>
           </Tabs>
-          <Box minW='225px' bg='gray.200' borderRadius='4px' px='10px' py='10px' ml={8}>
-            <Text fontSize='1rem' mb='0.2rem' whiteSpace='nowrap'>
-              Popular Tags
-            </Text>
-            <Wrap>
-              <Tag size='sm' borderRadius='full' variant='solid' colorScheme='gray'>
-                Lorem
-              </Tag>
-              <Tag size='sm' borderRadius='full' variant='solid' colorScheme='gray'>
-                Lorem
-              </Tag>
-              <Tag size='sm' borderRadius='full' variant='solid' colorScheme='gray'>
-                Loremjhbjh
-              </Tag>
-            </Wrap>
-          </Box>
+          <TagsBox />
         </HStack>
       </Container>
     </>
