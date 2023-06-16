@@ -1,0 +1,80 @@
+import { EditIcon, SettingsIcon } from '@chakra-ui/icons'
+import { HStack, Link, Image, Text } from '@chakra-ui/react'
+import { NavLink } from 'react-router-dom'
+import { removeToken } from '../hooks/useLocalStorage'
+import { useUserStore } from '../store'
+
+export const LoginLinks = () => {
+  const { user, deleteUser } = useUserStore()
+
+  const logout = () => {
+    deleteUser()
+    removeToken('token')
+  }
+
+  return (
+    <HStack spacing={4} alignItems={'center'} mx='auto'>
+      <li style={{ listStyleType: 'none' }}>
+        <Link
+          as={NavLink}
+          to='/'
+          color='gray.500'
+          _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
+          _hover={{ textDecoration: 'none' }}
+        >
+          Home
+        </Link>
+      </li>
+      <li style={{ listStyleType: 'none' }}>
+        <Link
+          as={NavLink}
+          to='/editor'
+          color='gray.500'
+          _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
+          _hover={{ textDecoration: 'none' }}
+        >
+          <EditIcon mx={1} mb={1} />
+          New Article
+        </Link>
+      </li>
+      <li style={{ listStyleType: 'none' }}>
+        <Link
+          to='/settings'
+          as={NavLink}
+          color='gray.500'
+          _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
+          _hover={{ textDecoration: 'none' }}
+        >
+          <SettingsIcon mx={1} mb={1} />
+          Settings
+        </Link>
+      </li>
+      <li style={{ listStyleType: 'none' }}>
+        <Link
+          to='/user'
+          as={NavLink}
+          color='gray.500'
+          _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
+          _hover={{ textDecoration: 'none' }}
+        >
+          <HStack>
+            <Image objectFit='cover' boxSize='26px' borderRadius='50%' src={user?.image} />
+            <Text>Profile</Text>
+          </HStack>
+        </Link>
+      </li>
+      <li style={{ listStyleType: 'none' }}>
+        <Link
+          onClick={() => logout()}
+          to='/login'
+          as={NavLink}
+          color='gray.500'
+          _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
+          _hover={{ textDecoration: 'none' }}
+        >
+          Log Out
+        </Link>
+      </li>
+    </HStack>
+  )
+}
