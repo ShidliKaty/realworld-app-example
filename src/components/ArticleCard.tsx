@@ -1,57 +1,65 @@
 import { Avatar, Box, Button, Flex, HStack, Heading, Icon, Tag, Text } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { AiFillHeart } from 'react-icons/ai'
+import { Article } from '../entities/Articles'
+import { I18nSettings, format } from 'fecha'
 
-export const ArticleCard = () => {
+type format = (date: Date, format?: string, i18n?: I18nSettings) => string
+
+interface Props {
+  article: Article
+}
+
+export const ArticleCard = ({ article }: Props) => {
   return (
     <Box mx='-5' borderBottomWidth={2}>
       <HStack justifyContent='space-between' my={3}>
         <Flex>
-          <Avatar w='32px' h='32px' src='' />
+          <Avatar w='32px' h='32px' src={article.author.image} />
           <Box ml='3'>
             <Text fontSize='1rem' lineHeight={0.9} fontWeight='bold' color='green'>
-              Name Surname
+              {article.author.username}
             </Text>
             <Text fontSize='0.8rem' color='gray.400'>
-              December 9, 2023
+              {format(new Date(`${article.createdAt}`), 'MMMM D, YYYY')}
             </Text>
           </Box>
         </Flex>
         <Button
-          size='sm'
+          size='xs'
           bg='green'
           color='white'
           _hover={{
             bg: 'green.500',
           }}
         >
-          <Icon mr={1} as={AiFillHeart} />0
+          <Icon mr={1} as={AiFillHeart} />
+          {article.favoritesCount}
         </Button>
       </HStack>
       <Link to={'/'}>
-        <Heading fontSize='1.5rem'>Heading</Heading>
-        <Text color='gray'>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis, dolorum assumenda
-          porro minima nemo in sunt quasi aliquid, odio quis sequi. Ipsam in quo impedit qui maiores
-          temporibus dolorum amet!
-        </Text>
+        <Heading fontSize='1.5rem'>{article.title}</Heading>
+        <Text color='gray'>{article.description}</Text>
         <HStack justifyContent='space-between' my={4}>
           <Box as={'span'} fontSize='0.8rem' color='gray.400'>
             Read more...
           </Box>
-          <Box as={'ul'}>
-            <Tag
-              variant='outline'
-              opacity={0.4}
-              size='sm'
-              color={'gray.700'}
-              borderRadius='full'
-              as={'li'}
-              style={{ listStyleType: 'none' }}
-            >
-              Lorem
-            </Tag>
-          </Box>
+          <HStack as={'ul'}>
+            {article.tagList.map((tag) => (
+              <Tag
+                key={tag}
+                variant='outline'
+                opacity={0.4}
+                size='sm'
+                color={'gray.700'}
+                borderRadius='full'
+                as={'li'}
+                style={{ listStyleType: 'none' }}
+              >
+                {tag}
+              </Tag>
+            ))}
+          </HStack>
         </HStack>
       </Link>
     </Box>

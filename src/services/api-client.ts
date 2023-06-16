@@ -2,6 +2,7 @@ import axios from "axios";
 import { getToken } from "../hooks/useLocalStorage";
 import { UserResponse } from "../entities/UserResponses";
 import { Tags } from "../entities/Tags";
+import { Articles } from "../entities/Articles";
 
 
 const client = axios.create({ baseURL: 'https://api.realworld.io/api' });
@@ -19,5 +20,10 @@ export const getUser = async () => {
 }
 export const getTags = async () => {
     const response = await client.get<Tags>('tags');
+    return response.data;
+  };
+
+export const getArticles = async () => {
+    const response = await client.get<Articles>('articles');
     return response.data;
   };
