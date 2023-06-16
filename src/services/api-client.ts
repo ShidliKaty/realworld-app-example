@@ -1,23 +1,17 @@
 import axios from "axios";
+import { getToken } from "../hooks/useLocalStorage";
+import { UserResponse } from "../entities/UserResponses";
 
-const axiosInstance = axios.create({
-    baseURL: 'https://api.realworld.io/api'
-})
 
-class APIClient<T> {
-    endpoint: string;
+const client = axios.create({ baseURL: 'https://api.realworld.io/api' });
 
-    constructor(endpoint: string) {
-        this.endpoint = endpoint;
-    }
+client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
 
-    getAll = () => {
-        return axiosInstance.get<T[]>(this.endpoint).then(res => res.data)
-    }
+const SESSION_EXPIRED_STATUS_CODE = 401;
 
-    post = (data: T) => {
-        return axiosInstance.post<T>(this.endpoint, data).then(res => res.data)
-    }
+export const getUser = async () => {
+   
+    const response = await client.get<UserResponse>('user');
+    return response.data;
+  
 }
-
-export default APIClient
