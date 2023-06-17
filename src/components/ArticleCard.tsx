@@ -17,7 +17,7 @@ export const ArticleCard = ({ article }: Props) => {
         <Flex>
           <Avatar w='32px' h='32px' src={article.author.image} />
           <Box ml='3'>
-            <Text fontSize='1rem' lineHeight={0.9} fontWeight='bold' color='green'>
+            <Text fontSize='1rem' lineHeight={0.9} fontWeight='bold' color='#5CB85C'>
               {article.author.username}
             </Text>
             <Text fontSize='0.8rem' color='gray.400'>
@@ -27,10 +27,10 @@ export const ArticleCard = ({ article }: Props) => {
         </Flex>
         <Button
           size='xs'
-          bg='green'
+          bg='#5CB85C'
           color='white'
           _hover={{
-            bg: 'green.500',
+            bg: 'green',
           }}
         >
           <Icon mr={1} as={AiFillHeart} />

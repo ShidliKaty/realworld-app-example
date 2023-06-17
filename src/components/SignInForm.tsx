@@ -62,12 +62,12 @@ const SignInForm = () => {
         isDisabled={!isValid}
         type={'submit'}
         disabled={true}
-        bg={'green'}
+        bg={'#5CB85C'}
         color='white'
         w='20%'
         size='lg'
         _hover={{
-          bg: 'green.500',
+          bg: 'green',
         }}
       >
         Sign in

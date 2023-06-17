@@ -45,14 +45,14 @@ const ProfilePage = () => {
       <Container minW='920px' py={5}>
         <Tabs>
           <TabList>
-            <Tab _selected={{ color: 'green' }} color='grey'>
+            <Tab _selected={{ color: '#5CB85C' }} color='grey'>
               My Articles
             </Tab>
-            <Tab _selected={{ color: 'green' }} color='grey'>
+            <Tab _selected={{ color: '#5CB85C' }} color='grey'>
               Favorited Articles
             </Tab>
           </TabList>
-          <TabIndicator mt='-1.5px' height='2px' bg='green' borderRadius='1px' />
+          <TabIndicator mt='-1.5px' height='2px' bg='#5CB85C' borderRadius='1px' />
           <TabPanels>
             <TabPanel>
               <ArticleCard />

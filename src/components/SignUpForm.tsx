@@ -103,12 +103,12 @@ const SignUpForm = () => {
       <Button
         // isDisabled={!isValid}
         type={'submit'}
-        bg={'green'}
+        bg={'#5CB85C'}
         color='white'
         w='20%'
         size='lg'
         _hover={{
-          bg: 'green.500',
+          bg: 'green',
         }}
       >
         Sign up

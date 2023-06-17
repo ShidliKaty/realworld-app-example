@@ -17,8 +17,8 @@ const NavBar = () => {
   return (
     <Container minW='1110px'>
       <HStack as={'nav'} py='8px' justifyContent='space-between'>
-        <Box alignItems={'center'} fontSize={25} color='green' fontWeight='bold'>
-          conduit
+        <Box alignItems={'center'} fontSize={25} color='#5CB85C' fontWeight='bold'>
+          <NavLink to={'/'}>conduit</NavLink>
         </Box>
         {/* {isLoading && null} */}
         {user || token ? <LoginLinks /> : <Links />}

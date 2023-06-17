@@ -11,11 +11,11 @@ const NewArticlePage = () => {
           <Input type='text' placeholder='Enter tags' />
           <Button
             type={'submit'}
-            bg={'green'}
+            bg={'#5CB85C'}
             color='white'
             size='lg'
             _hover={{
-              bg: 'green.500',
+              bg: 'green',
             }}
           >
             Publish Article

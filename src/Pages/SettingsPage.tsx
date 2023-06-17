@@ -18,11 +18,11 @@ const SettingsPage = () => {
         <Input id='password' size={'lg'} type='password' placeholder='New Password' />
         <Button
           type={'submit'}
-          bg={'green'}
+          bg={'#5CB85C'}
           color='white'
           size='lg'
           _hover={{
-            bg: 'green.500',
+            bg: 'green',
           }}
         >
           Update Settings
