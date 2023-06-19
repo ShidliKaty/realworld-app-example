@@ -1,0 +1,28 @@
+.btn {
+    justify-content: center;
+    vertical-align: middle;
+    align-items: center;
+    outline: 2px solid transparent;
+    border-radius: 4px;
+    outline-offset: 2px;
+    line-height: 1.2;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #5CB85C;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
+    border: 1px solid #E2E8F0;
+    height: 1.5rem;
+    min-width: 1.5rem;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.3s transform;
+    &:hover {
+        transform: translateY(-3px);
+    }
+}
+
+.btn.active {
+    color: white;
+    background-color: #5CB85C;
+}

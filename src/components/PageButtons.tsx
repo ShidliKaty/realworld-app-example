@@ -1,15 +1,13 @@
-import { ButtonGroup, Button } from '@chakra-ui/react'
+import { ButtonGroup } from '@chakra-ui/react'
 import { useArticles } from '../hooks/useArticles'
 import { useArticlesQueryStore } from '../store'
-
-interface Props {
-  onChangePage: (pageNumber: number) => void
-}
+import './PageButtons.css'
 
 export const PageButtons = () => {
   const { data } = useArticles()
 
   const setPage = useArticlesQueryStore((s) => s.setPage)
+  const page = useArticlesQueryStore((s) => s.articlesQuery.page)
 
   const pages = data?.articlesCount ? Math.ceil(data?.articlesCount / 10) : 0
 
@@ -18,16 +16,14 @@ export const PageButtons = () => {
   return (
     <ButtonGroup variant='outline' size='xs'>
       {list.map((i) => (
-        <Button
-          as={'button'}
+        <button
+          key={i}
           onClick={() => setPage(i)}
           value={i}
-          color='#5CB85C'
-          _focus={{ bg: '#5CB85C', color: 'white' }}
-          key={i}
+          className={page === i ? ' btn active' : 'btn'}
         >
           {i}
-        </Button>
+        </button>
       ))}
     </ButtonGroup>
   )
