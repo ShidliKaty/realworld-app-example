@@ -12,15 +12,36 @@ interface UserStore {
     user: User | null;
     setUser: (user: User | null) => void;
     deleteUser: () => void;
-    // isLogIn: () => boolean;
+    
 }
 
 export const useUserStore = create<UserStore>((set) => ({
     user: null,
     setUser: (user) => set((store) => ({...store, user}) ),
     deleteUser: () => set((store) => ({...store, user: null})),
-    // isLogIn: () => !!get().user //Boolean(get().user)
 }))
+
+export interface ArticlesQuery {
+    page: number,
+    limit: number,
+}
+
+interface ArticlesQueryStore {
+    articlesQuery: ArticlesQuery;
+    pagesCount: number;
+    setPagesCount: (articlesCount: number) => void;
+    setPage: (page: number) => void;
+}
+
+export const useArticlesQueryStore = create<ArticlesQueryStore>((set) => ({
+    articlesQuery: {
+        page: 1,
+        limit: 10,
+    },
+    pagesCount: 0,
+    setPagesCount: (pagesCount) => set((store) => ({...store, pagesCount})),
+    setPage: (page) => set((store) => ({articlesQuery: {...store.articlesQuery, page}})),
+})) 
 
 if (process.env.NODE_ENV === 'development')
     mountStoreDevtool('User Store', useUserStore)

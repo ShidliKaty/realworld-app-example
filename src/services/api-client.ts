@@ -1,8 +1,11 @@
 import axios from "axios";
+import {useInfiniteQuery} from "@tanstack/react-query";
 import { getToken } from "../hooks/useLocalStorage";
 import { UserResponse } from "../entities/UserResponses";
 import { Tags } from "../entities/Tags";
 import { Articles } from "../entities/Articles";
+import { ArticlesQuery } from "../store";
+
 
 
 const client = axios.create({ baseURL: 'https://api.realworld.io/api' });
@@ -23,7 +26,12 @@ export const getTags = async () => {
     return response.data;
   };
 
-export const getArticles = async () => {
-    const response = await client.get<Articles>('articles');
+export const getArticles = async (query: ArticlesQuery) => {
+    const response = await client.get<Articles>('articles', {
+      params: {
+        offset: (query.page - 1) * query.limit,
+        limit: query.limit
+      }
+    });
     return response.data;
   };
