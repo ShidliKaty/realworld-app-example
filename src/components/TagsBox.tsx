@@ -3,7 +3,6 @@ import { useTags } from '../hooks/useTags'
 
 export const TagsBox = () => {
   const { data, isLoading } = useTags()
-  console.log(data)
   return (
     <Box w='425px' bg='gray.200' borderRadius='4px' px='10px' py='10px' ml={8}>
       <Text fontSize='1rem' mb='0.2rem' whiteSpace='nowrap'>

@@ -1,4 +1,4 @@
-export const useToken = (key: string) => {
+export const getToken = (key: string) => {
     const local = localStorage.getItem(key)
         if(local != null){
             return JSON.parse(local)

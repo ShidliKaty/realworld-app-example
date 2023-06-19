@@ -13,7 +13,7 @@ export const signUpUserFn = async (user: RegisterInput) => {
     return response.data;
   };
   
-export const loginUserFn = async (user: LoginRequest | null) => {
+export const loginUserFn = async (user: LoginRequest) => {
     const response = await authAPI.post<UserResponse>('users/login', user);
     return response.data;
   };

@@ -14,7 +14,6 @@ export const useLogIn = () => {
     return useMutation<UserResponse, Error, LoginRequest, unknown>(
         (userData: LoginRequest) => loginUserFn(userData), {
             onSuccess: (data) => {
-                console.log(data);
                 setUser(data.user)
                 setToken(data.user.token)
                 navigate('/');

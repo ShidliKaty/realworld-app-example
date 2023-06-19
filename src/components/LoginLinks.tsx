@@ -1,5 +1,5 @@
 import { EditIcon, SettingsIcon } from '@chakra-ui/icons'
-import { HStack, Link, Image, Text } from '@chakra-ui/react'
+import { HStack, Link, Text, Avatar } from '@chakra-ui/react'
 import { NavLink } from 'react-router-dom'
 import { removeToken } from '../hooks/useLocalStorage'
 import { useUserStore } from '../store'
@@ -58,7 +58,7 @@ export const LoginLinks = () => {
           _hover={{ textDecoration: 'none' }}
         >
           <HStack>
-            <Image objectFit='cover' boxSize='26px' borderRadius='50%' src={user?.image} />
+            <Avatar objectFit='cover' boxSize='26px' borderRadius='50%' src={user?.image} />
             <Text>Profile</Text>
           </HStack>
         </Link>

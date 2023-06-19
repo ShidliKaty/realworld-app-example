@@ -1,6 +1,6 @@
 import { Heading, Stack, Text } from '@chakra-ui/react'
 
-const Banner = () => {
+export const Banner = () => {
   return (
     <Stack
       mx='auto'
@@ -21,5 +21,3 @@ const Banner = () => {
     </Stack>
   )
 }
-
-export default Banner
