@@ -24,6 +24,7 @@ export const useUserStore = create<UserStore>((set) => ({
 export interface ArticlesQuery {
     page: number,
     limit: number,
+    tag?: string,
 }
 
 interface ArticlesQueryStore {
@@ -31,6 +32,8 @@ interface ArticlesQueryStore {
     pagesCount: number;
     setPagesCount: (articlesCount: number) => void;
     setPage: (page: number) => void;
+    setTag: (tag: string) => void;
+    deleteTag: () => void;
 }
 
 export const useArticlesQueryStore = create<ArticlesQueryStore>((set) => ({
@@ -41,7 +44,12 @@ export const useArticlesQueryStore = create<ArticlesQueryStore>((set) => ({
     pagesCount: 0,
     setPagesCount: (pagesCount) => set((store) => ({...store, pagesCount})),
     setPage: (page) => set((store) => ({articlesQuery: {...store.articlesQuery, page}})),
+    setTag: (tag) => set(() => ({articlesQuery: {page: 1, limit: 10, tag}})),
+    deleteTag: () => set((store) => ({articlesQuery: {page: 1, limit: 10}}))
 })) 
 
 if (process.env.NODE_ENV === 'development')
     mountStoreDevtool('User Store', useUserStore)
+
+if (process.env.NODE_ENV === 'development')
+    mountStoreDevtool('Articles Store', useArticlesQueryStore)

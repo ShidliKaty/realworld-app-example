@@ -7,5 +7,5 @@ export const useArticles = () => {
     return useQuery({
     queryKey: ['articles', articlesQuery],
     queryFn: () => getArticles(articlesQuery),
-    keepPreviousData: true,
+    // keepPreviousData: true,
 })}

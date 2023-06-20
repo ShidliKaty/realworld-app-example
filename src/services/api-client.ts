@@ -30,7 +30,8 @@ export const getArticles = async (query: ArticlesQuery) => {
     const response = await client.get<Articles>('articles', {
       params: {
         offset: (query.page - 1) * query.limit,
-        limit: query.limit
+        limit: query.limit,
+        tag: query.tag
       }
     });
     return response.data;
