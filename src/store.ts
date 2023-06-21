@@ -34,6 +34,7 @@ interface ArticlesQueryStore {
     setPage: (page: number) => void;
     setTag: (tag: string) => void;
     deleteTag: () => void;
+    setArticlesQuery: () => void;
 }
 
 export const useArticlesQueryStore = create<ArticlesQueryStore>((set) => ({
@@ -45,7 +46,8 @@ export const useArticlesQueryStore = create<ArticlesQueryStore>((set) => ({
     setPagesCount: (pagesCount) => set((store) => ({...store, pagesCount})),
     setPage: (page) => set((store) => ({articlesQuery: {...store.articlesQuery, page}})),
     setTag: (tag) => set(() => ({articlesQuery: {page: 1, limit: 10, tag}})),
-    deleteTag: () => set((store) => ({articlesQuery: {page: 1, limit: 10}}))
+    deleteTag: () => set(() => ({articlesQuery: {page: 1, limit: 10}})),
+    setArticlesQuery: () => set(() => ({articlesQuery: {page:1 , limit: 10}}))
 })) 
 
 if (process.env.NODE_ENV === 'development')

@@ -2,10 +2,11 @@ import { EditIcon, SettingsIcon } from '@chakra-ui/icons'
 import { HStack, Link, Text, Avatar } from '@chakra-ui/react'
 import { NavLink } from 'react-router-dom'
 import { removeToken } from '../hooks/useLocalStorage'
-import { useUserStore } from '../store'
+import { useArticlesQueryStore, useUserStore } from '../store'
 
 export const LoginLinks = () => {
   const { user, deleteUser } = useUserStore()
+  const setArticlesQuery = useArticlesQueryStore((s) => s.setArticlesQuery)
 
   const logout = () => {
     deleteUser()
@@ -13,10 +14,11 @@ export const LoginLinks = () => {
   }
 
   return (
-    <HStack spacing={4} alignItems={'center'} mx='auto'>
+    <HStack as='ul' spacing={4} alignItems={'center'} mx='auto'>
       <li style={{ listStyleType: 'none' }}>
         <Link
           as={NavLink}
+          onClick={() => setArticlesQuery()}
           to='/'
           color='gray.500'
           _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
