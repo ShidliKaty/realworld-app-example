@@ -7,6 +7,7 @@ import ErrorPage from './Pages/ErrorPage'
 import NewArticlePage from './Pages/NewArticlePage'
 import SettingsPage from './Pages/SettingsPage'
 import ProfilePage from './Pages/ProfilePage'
+import ArticlePage from './Pages/ArticlePage'
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
       { path: 'editor', element: <NewArticlePage /> },
       { path: 'settings', element: <SettingsPage /> },
       { path: 'user', element: <ProfilePage /> },
+      { path: 'article/:slug', element: <ArticlePage /> },
     ],
   },
 ])
