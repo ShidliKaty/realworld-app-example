@@ -17,3 +17,7 @@ export interface Articles {
     articles: Article[],
     articlesCount: number
 }
+
+export interface ArticleResponse {
+    article: Article 
+}

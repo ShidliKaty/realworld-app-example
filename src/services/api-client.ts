@@ -1,9 +1,8 @@
 import axios from "axios";
-import {useInfiniteQuery} from "@tanstack/react-query";
 import { getToken } from "../hooks/useLocalStorage";
 import { UserResponse } from "../entities/UserResponses";
 import { Tags } from "../entities/Tags";
-import { Articles } from "../entities/Articles";
+import { ArticleResponse, Articles } from "../entities/Articles";
 import { ArticlesQuery } from "../store";
 
 
@@ -36,3 +35,12 @@ export const getArticles = async (query: ArticlesQuery) => {
     });
     return response.data;
   };
+
+  export const getArticle = async (slug: string) => {
+    const response = await client.get<ArticleResponse>('articles/' + slug, {
+      params: {
+        slug: slug
+      }
+    });
+    return response.data;
+  }
