@@ -9,7 +9,7 @@ const SignInPage = () => {
         Sign in
       </Heading>
 
-      <Link to='/register' as={NavLink} color={'green'}>
+      <Link to='/register' as={NavLink} color='#5CB85C'>
         Need an account?
       </Link>
       <SignInForm />
