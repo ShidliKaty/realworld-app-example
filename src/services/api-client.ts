@@ -4,6 +4,7 @@ import { UserResponse } from "../entities/UserResponses";
 import { Tags } from "../entities/Tags";
 import { ArticleResponse, Articles } from "../entities/Articles";
 import { ArticlesQuery } from "../store";
+import { ProfileResponse } from "../entities/Profile";
 
 
 
@@ -25,12 +26,13 @@ export const getTags = async () => {
     return response.data;
   };
 
-export const getArticles = async (query: ArticlesQuery) => {
+export const getArticles = async (query: ArticlesQuery, username?: string) => {
     const response = await client.get<Articles>('articles', {
       params: {
         offset: (query.page - 1) * query.limit,
         limit: query.limit,
-        tag: query.tag
+        tag: query.tag,
+        author: username
       }
     });
     return response.data;
@@ -40,6 +42,15 @@ export const getArticles = async (query: ArticlesQuery) => {
     const response = await client.get<ArticleResponse>('articles/' + slug, {
       params: {
         slug: slug
+      }
+    });
+    return response.data;
+  }
+
+  export const getProfile = async (name: string) => {
+    const response = await client.get<ProfileResponse>('profiles/' + name, {
+      params: {
+        username: name
       }
     });
     return response.data;
