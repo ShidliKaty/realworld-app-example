@@ -32,7 +32,8 @@ export const getArticles = async (query: ArticlesQuery, username?: string) => {
         offset: (query.page - 1) * query.limit,
         limit: query.limit,
         tag: query.tag,
-        author: username
+        author: username,
+        favorited: query.username
       }
     });
     return response.data;

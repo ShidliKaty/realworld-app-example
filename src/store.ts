@@ -25,16 +25,19 @@ export interface ArticlesQuery {
     page: number,
     limit: number,
     tag?: string,
+    username?: string,
 }
 
 interface ArticlesQueryStore {
     articlesQuery: ArticlesQuery;
     pagesCount: number;
     setPagesCount: (articlesCount: number) => void;
+    setArticlesQuery: () => void;
     setPage: (page: number) => void;
     setTag: (tag: string) => void;
     deleteTag: () => void;
-    setArticlesQuery: () => void;
+    setUsername: (username: string) => void;
+    deleteUsername: () => void;
 }
 
 export const useArticlesQueryStore = create<ArticlesQueryStore>((set) => ({
@@ -43,11 +46,13 @@ export const useArticlesQueryStore = create<ArticlesQueryStore>((set) => ({
         limit: 10,
     },
     pagesCount: 0,
+    setArticlesQuery: () => set(() => ({articlesQuery: {page:1 , limit: 10}})),
     setPagesCount: (pagesCount) => set((store) => ({...store, pagesCount})),
     setPage: (page) => set((store) => ({articlesQuery: {...store.articlesQuery, page}})),
     setTag: (tag) => set(() => ({articlesQuery: {page: 1, limit: 10, tag}})),
     deleteTag: () => set(() => ({articlesQuery: {page: 1, limit: 10}})),
-    setArticlesQuery: () => set(() => ({articlesQuery: {page:1 , limit: 10}}))
+    setUsername: (username) => set(({articlesQuery: {page: 1, limit: 10, username}})),
+    deleteUsername: () => set(() => ({articlesQuery: {page: 1, limit: 10}}))
 })) 
 
 if (process.env.NODE_ENV === 'development')
