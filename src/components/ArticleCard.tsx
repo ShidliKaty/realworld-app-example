@@ -1,9 +1,9 @@
-import { Box, Button, HStack, Heading, Icon, Text } from '@chakra-ui/react'
+import { Box, HStack, Heading, Icon, Text } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
-import { AiFillHeart } from 'react-icons/ai'
 import { Article } from '../entities/Articles'
 import { ArticleProfile } from './ArticleProfile'
 import { Tags } from './Tags'
+import { ButtonFav } from './ButtonFav'
 
 interface Props {
   article: Article
@@ -14,17 +14,7 @@ export const ArticleCard = ({ article }: Props) => {
     <Box mx='-5' borderBottomWidth={2}>
       <HStack justifyContent='space-between' my={3}>
         <ArticleProfile color='#5CB85C' article={article} />
-        <Button
-          size='xs'
-          bg='#5CB85C'
-          color='white'
-          _hover={{
-            bg: 'green',
-          }}
-        >
-          <Icon mr={1} as={AiFillHeart} />
-          {article.favoritesCount}
-        </Button>
+        <ButtonFav size='xs' likes={article.favoritesCount} />
       </HStack>
       <Link to={'/article/' + article.slug}>
         <Heading fontSize='1.5rem'>{article.title}</Heading>

@@ -41,8 +41,8 @@ const ArticlePage = () => {
             <HStack justifyContent='flex-start' mt={1} spacing={7}>
               <ArticleProfile color='white' article={data?.article} />
               <HStack spacing={1}>
-                <ButtonFollow name={data.article.author.username} />
-                <ButtonFav likes={data.article.favoritesCount} />
+                <ButtonFollow color='#ccc' name={data.article.author.username} />
+                <ButtonFav size='sm' likes={data.article.favoritesCount} />
               </HStack>
             </HStack>
           </VStack>
@@ -58,8 +58,8 @@ const ArticlePage = () => {
           <HStack justifyContent='center' mt={1} mb={10} spacing={7}>
             <ArticleProfile color='#5CB85C' article={data?.article} />
             <HStack spacing={1}>
-              <ButtonFollow name={data.article.author.username} />
-              <ButtonFav likes={data.article.favoritesCount} />
+              <ButtonFollow color='#ccc' name={data.article.author.username} />
+              <ButtonFav size='sm' likes={data.article.favoritesCount} />
             </HStack>
           </HStack>
           <Text textAlign='center' mb={5}>
