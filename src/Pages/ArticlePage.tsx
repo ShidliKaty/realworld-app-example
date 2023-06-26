@@ -16,6 +16,7 @@ import { ArticleProfile } from '../components/ArticleProfile'
 import { Tags } from '../components/Tags'
 import { ButtonFollow } from '../components/ButtonFollow'
 import { ButtonFav } from '../components/ButtonFav'
+import { CommentsList } from '../components/CommentsList'
 
 const ArticlePage = () => {
   const { slug } = useParams()
@@ -72,6 +73,7 @@ const ArticlePage = () => {
             </Link>{' '}
             to add comments on this article.
           </Text>
+          <CommentsList />
         </Container>
       </Box>
     </>

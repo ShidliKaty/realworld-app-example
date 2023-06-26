@@ -5,6 +5,7 @@ import { Tags } from "../entities/Tags";
 import { ArticleResponse, Articles } from "../entities/Articles";
 import { ArticlesQuery } from "../store";
 import { ProfileResponse } from "../entities/Profile";
+import { Comments } from "../entities/Comments";
 
 
 
@@ -56,3 +57,12 @@ export const getArticles = async (query: ArticlesQuery, username?: string) => {
     });
     return response.data;
   }
+
+  export const getComments = async (slug: string) => {
+    const response = await client.get<Comments>('articles/' + slug + '/comments', {
+      params: {
+        slug: slug
+      }
+  });
+  return response.data;
+}
