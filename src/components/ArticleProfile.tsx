@@ -2,6 +2,7 @@ import { Avatar, Box, HStack, Text } from '@chakra-ui/react'
 import { I18nSettings, format } from 'fecha'
 import { Article } from '../entities/Articles'
 import { Link } from 'react-router-dom'
+import { useArticlesQueryStore } from '../store'
 
 type format = (date: Date, format?: string, i18n?: I18nSettings) => string
 
@@ -11,9 +12,11 @@ interface Props {
 }
 
 export const ArticleProfile = ({ article, color }: Props) => {
+  const setArticlesQuery = useArticlesQueryStore((s) => s.setArticlesQuery)
   return (
     <HStack>
       <Avatar
+        onClick={() => setArticlesQuery()}
         as={Link}
         to={'/' + article.author.username}
         w='32px'
@@ -22,6 +25,7 @@ export const ArticleProfile = ({ article, color }: Props) => {
       />
       <Box ml='2'>
         <Text
+          onClick={() => setArticlesQuery()}
           as={Link}
           to={'/' + article.author.username}
           fontSize='1rem'
