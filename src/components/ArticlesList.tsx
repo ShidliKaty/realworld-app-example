@@ -1,46 +1,68 @@
 import { Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react'
-import { ArticleCard } from './ArticleCard'
-import { useArticles } from '../hooks/useArticles'
-import { useArticlesQueryStore } from '../store'
+import { useArticlesQueryStore, useUserStore } from '../store'
+import { getToken } from '../hooks/useLocalStorage'
+import { useState } from 'react'
+import { GlobalFeedPanel } from './GlobalFeedPanel'
+import { MyFeedPanel } from './MyFeedPanel'
+import { TagPanel } from './TagPanel'
 
 export const ArticlesList = () => {
   const tag = useArticlesQueryStore((s) => s.articlesQuery.tag)
   const deleteTag = useArticlesQueryStore((s) => s.deleteTag)
-  const { data, isLoading } = useArticles()
+
+  const token = getToken('token')
+  const { user } = useUserStore()
+
+  const [tabIndex, setTabIndex] = useState(0)
+
+  const handleTabsChange = (index: number) => {
+    setTabIndex(index)
+    if ((index === 0 || index === 1) && tag) {
+      return deleteTag()
+    }
+  }
 
   return (
-    <Tabs index={tag ? 1 : 0}>
-      <TabList>
-        <Tab _selected={{ color: '#5CB85C' }} color='grey' onClick={() => deleteTag()}>
-          Global Feed
-        </Tab>
-
-        {tag && (
+    <>
+      <Tabs
+        index={tag ? 2 : tabIndex}
+        onChange={handleTabsChange}
+        lazyBehavior='unmount'
+        isManual={true}
+        isLazy
+      >
+        <TabList>
+          {(user || token) && (
+            <Tab _selected={{ color: '#5CB85C' }} color='grey'>
+              My Feed
+            </Tab>
+          )}
           <Tab _selected={{ color: '#5CB85C' }} color='grey'>
-            <Text fontSize='xl' fontWeight='bold' mr={1}>
-              #
-            </Text>
-            {tag}
+            Global Feed
           </Tab>
-        )}
-      </TabList>
-      <TabIndicator mt='-1.5px' height='2px' bg='#5CB85C' borderRadius='1px' />
-      <TabPanels>
-        <TabPanel w='825px'>
-          {isLoading && <Text>Loading articles...</Text>}
-          {data?.articles?.map((article) => (
-            <ArticleCard key={article.slug} article={article} />
-          ))}
-        </TabPanel>
-        {tag && (
-          <TabPanel w='825px'>
-            {isLoading && <Text>Loading articles...</Text>}
-            {data?.articles?.map((article) => (
-              <ArticleCard key={article.slug} article={article} />
-            ))}
+
+          {tag && (
+            <Tab _selected={{ color: '#5CB85C' }} color='grey'>
+              <Text fontSize='xl' fontWeight='bold' mr={1}>
+                #
+              </Text>
+              {tag}
+            </Tab>
+          )}
+        </TabList>
+        <TabIndicator mt='-1.5px' height='2px' bg='#5CB85C' borderRadius='1px' />
+        <TabPanels>
+          <TabPanel w='825px' px='0'>
+            {(user || token) && <MyFeedPanel />}
           </TabPanel>
-        )}
-      </TabPanels>
-    </Tabs>
+          <TabPanel w='825px' px='0'>
+            <GlobalFeedPanel />
+          </TabPanel>
+          <TabPanel w='825px' px='0'>
+            {tag && <TagPanel />}
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+    </>
   )
 }
