@@ -12,7 +12,6 @@ interface UserStore {
     user: User | null;
     setUser: (user: User | null) => void;
     deleteUser: () => void;
-    
 }
 
 export const useUserStore = create<UserStore>((set) => ({
@@ -53,6 +52,23 @@ export const useArticlesQueryStore = create<ArticlesQueryStore>((set) => ({
     deleteTag: () => set(() => ({articlesQuery: {page: 1, limit: 10}})),
     setUsername: (username) => set(({articlesQuery: {page: 1, limit: 10, username}})),
     deleteUsername: () => set(() => ({articlesQuery: {page: 1, limit: 10}}))
+})) 
+
+export interface ArticlesFeedQuery {
+    page: number,
+    limit: number,
+}
+
+interface ArticlesFeedQueryStore {
+    articlesFeedQuery: ArticlesFeedQuery;
+    setPage: (page: number) => void;
+}
+export const useArticlesFeedQueryStore = create<ArticlesFeedQueryStore>((set) => ({
+    articlesFeedQuery: {
+        page: 1,
+        limit: 10,
+    },
+    setPage: (page) => set((store) => ({articlesFeedQuery: {...store.articlesFeedQuery, page}})),
 })) 
 
 if (process.env.NODE_ENV === 'development')

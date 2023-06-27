@@ -3,7 +3,7 @@ import { getToken } from "../hooks/useLocalStorage";
 import { UserResponse } from "../entities/UserResponses";
 import { Tags } from "../entities/Tags";
 import { ArticleResponse, Articles } from "../entities/Articles";
-import { ArticlesQuery } from "../store";
+import { ArticlesFeedQuery, ArticlesQuery } from "../store";
 import { ProfileResponse } from "../entities/Profile";
 import { Comments } from "../entities/Comments";
 
@@ -48,6 +48,17 @@ export const getArticles = async (query: ArticlesQuery, username?: string) => {
     });
     return response.data;
   }
+
+  export const getArticlesFeed = async (query: ArticlesFeedQuery) => {
+    client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
+    const response = await client.get<Articles>('articles/feed', {
+      params: {
+        offset: (query.page - 1) * query.limit,
+        limit: query.limit,
+      }
+    });
+    return response.data;
+  };
 
   export const getProfile = async (name: string) => {
     const response = await client.get<ProfileResponse>('profiles/' + name, {
