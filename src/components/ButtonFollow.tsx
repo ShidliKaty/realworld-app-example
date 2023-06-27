@@ -1,4 +1,6 @@
 import { Button, Text } from '@chakra-ui/react'
+import { useUserStore } from '../store'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   name: string
@@ -6,8 +8,17 @@ interface Props {
 }
 
 export const ButtonFollow = ({ name, color }: Props) => {
+  const { user } = useUserStore()
+  const navigate = useNavigate()
+
+  const onFollow = () => {
+    if (!user) {
+      navigate('/register')
+    }
+  }
   return (
     <Button
+      onClick={() => onFollow()}
       variant='outline'
       size='sm'
       color={color}
