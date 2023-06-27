@@ -11,7 +11,7 @@ interface Props {
 
 export const ArticleCard = ({ article }: Props) => {
   return (
-    <Box mx='-5' borderBottomWidth={2}>
+    <Box borderBottomWidth={2}>
       <HStack justifyContent='space-between' my={3}>
         <ArticleProfile color='#5CB85C' article={article} />
         <ButtonFav size='xs' likes={article.favoritesCount} />
