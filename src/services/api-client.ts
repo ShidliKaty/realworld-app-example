@@ -77,3 +77,13 @@ export const getArticles = async (query: ArticlesQuery, username?: string) => {
   });
   return response.data;
 }
+
+export const followProfile = async (username: string) => {
+  client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
+  const response = await client.post<ProfileResponse>('profiles/' + username + '/follow', null, {
+    params: {
+      username
+    }
+  });
+  return response.data;
+}

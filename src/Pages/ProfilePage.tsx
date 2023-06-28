@@ -29,7 +29,11 @@ const ProfilePage = () => {
             </Text>
           </Stack>
           <Flex justifyContent='flex-end'>
-            <ButtonFollow color='#999' name={data.profile.username} />
+            <ButtonFollow
+              color='#999'
+              name={data.profile.username}
+              following={data.profile.following}
+            />
           </Flex>
         </Container>
       </Box>

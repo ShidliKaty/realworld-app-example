@@ -1,24 +1,17 @@
 import { Button, Text } from '@chakra-ui/react'
-import { useUserStore } from '../store'
-import { useNavigate } from 'react-router-dom'
-
+import { useFollowProfile } from '../hooks/useFollowProfile'
 interface Props {
   name: string
   color: string
+  following: boolean
 }
 
-export const ButtonFollow = ({ name, color }: Props) => {
-  const { user } = useUserStore()
-  const navigate = useNavigate()
+export const ButtonFollow = ({ name, color, following }: Props) => {
+  const follow = useFollowProfile()
 
-  const onFollow = () => {
-    if (!user) {
-      navigate('/register')
-    }
-  }
   return (
     <Button
-      onClick={() => onFollow()}
+      onClick={() => follow.mutate(name)}
       variant='outline'
       size='sm'
       color={color}
@@ -30,7 +23,7 @@ export const ButtonFollow = ({ name, color }: Props) => {
       <Text fontSize='1.2rem' mr={2} textAlign='center' pb='2px'>
         +
       </Text>
-      Follow {name}
+      {following ? `Unfollow ${name}` : `Follow ${name}`}
     </Button>
   )
 }
