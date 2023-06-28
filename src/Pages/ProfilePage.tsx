@@ -35,7 +35,6 @@ const ProfilePage = () => {
       </Box>
       <Container minW='920px' py={5} mb={10}>
         <ProfileArticles />
-        <PageButtons />
       </Container>
     </>
   )
