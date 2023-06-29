@@ -22,21 +22,31 @@ export const ArticlesList = () => {
     }
   }
 
+  const getIndex = () => {
+    if (user && tag) {
+      return 2
+    }
+    if (!user && tag) {
+      return 1
+    }
+    return tabIndex
+  }
+
   return (
     <>
       <Tabs
-        index={tag ? 2 : tabIndex}
+        index={getIndex()}
         onChange={handleTabsChange}
         lazyBehavior='unmount'
         isManual={true}
         isLazy
       >
         <TabList>
-          {(user || token) && (
+          {user || token ? (
             <Tab _selected={{ color: '#5CB85C' }} color='grey'>
               My Feed
             </Tab>
-          )}
+          ) : null}
           <Tab _selected={{ color: '#5CB85C' }} color='grey'>
             Global Feed
           </Tab>
@@ -52,9 +62,11 @@ export const ArticlesList = () => {
         </TabList>
         <TabIndicator mt='-1.5px' height='2px' bg='#5CB85C' borderRadius='1px' />
         <TabPanels>
-          <TabPanel w='825px' px='0'>
-            {(user || token) && <MyFeedPanel />}
-          </TabPanel>
+          {user || token ? (
+            <TabPanel w='825px' px='0'>
+              <MyFeedPanel />
+            </TabPanel>
+          ) : null}
           <TabPanel w='825px' px='0'>
             <GlobalFeedPanel />
           </TabPanel>
