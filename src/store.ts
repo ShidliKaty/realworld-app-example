@@ -69,7 +69,17 @@ export const useArticlesFeedQueryStore = create<ArticlesFeedQueryStore>((set) =>
         limit: 10,
     },
     setPage: (page) => set((store) => ({articlesFeedQuery: {...store.articlesFeedQuery, page}})),
-})) 
+}))
+
+interface ProfileFollowingStore {
+    following: boolean,
+    setFollowing: (following: boolean) => void
+}
+
+export const useProfileFollowingStore = create<ProfileFollowingStore>((set) => ({
+    following: true,
+    setFollowing: (following) => set(() => ({following}))
+}))
 
 if (process.env.NODE_ENV === 'development')
     mountStoreDevtool('User Store', useUserStore)
