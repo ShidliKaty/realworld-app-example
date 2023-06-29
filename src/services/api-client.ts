@@ -87,3 +87,13 @@ export const followProfile = async (username: string) => {
   });
   return response.data;
 }
+
+export const unfollowProfile = async (username: string) => {
+  client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
+  const response = await client.delete<ProfileResponse>('profiles/' + username + '/follow', {
+    params: {
+      username
+    }
+  });
+  return response.data;
+}
