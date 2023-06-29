@@ -14,7 +14,11 @@ export const ArticleCard = ({ article }: Props) => {
     <Box borderBottomWidth={2}>
       <HStack justifyContent='space-between' my={3}>
         <ArticleProfile color='#5CB85C' article={article} />
-        <ButtonLikes likes={article.favoritesCount} />
+        <ButtonLikes
+          slug={article.slug}
+          likes={article.favoritesCount}
+          isFavorited={article.favorited}
+        />
       </HStack>
       <Link to={'/article/' + article.slug}>
         <Heading fontSize='1.5rem'>{article.title}</Heading>
