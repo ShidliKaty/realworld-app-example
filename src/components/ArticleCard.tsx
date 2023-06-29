@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Article } from '../entities/Articles'
 import { ArticleProfile } from './ArticleProfile'
 import { Tags } from './Tags'
-import { ButtonFav } from './ButtonFav'
+import { ButtonLikes } from './ButtonLikes'
 
 interface Props {
   article: Article
@@ -14,7 +14,7 @@ export const ArticleCard = ({ article }: Props) => {
     <Box borderBottomWidth={2}>
       <HStack justifyContent='space-between' my={3}>
         <ArticleProfile color='#5CB85C' article={article} />
-        <ButtonFav size='xs' likes={article.favoritesCount} />
+        <ButtonLikes likes={article.favoritesCount} />
       </HStack>
       <Link to={'/article/' + article.slug}>
         <Heading fontSize='1.5rem'>{article.title}</Heading>
