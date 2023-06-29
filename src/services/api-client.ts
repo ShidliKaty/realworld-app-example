@@ -97,3 +97,23 @@ export const unfollowProfile = async (username: string) => {
   });
   return response.data;
 }
+
+export const favoriteArticle = async (slug: string) => {
+  client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
+  const response = await client.post<ArticleResponse>('articles/' + slug + '/favorite', null, {
+    params: {
+      slug: slug
+    }
+  });
+  return response.data;
+}
+
+export const unfavoriteArticle = async (slug: string) => {
+  client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
+  const response = await client.delete<ArticleResponse>('articles/' + slug + '/favorite', {
+    params: {
+      slug: slug
+    }
+  });
+  return response.data;
+}

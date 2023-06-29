@@ -81,6 +81,20 @@ export const useProfileFollowingStore = create<ProfileFollowingStore>((set) => (
     setFollowing: (following) => set(() => ({following}))
 }))
 
+interface FavoriteStore {
+    favorited: boolean,
+    favoritesCount: number,
+    setFavorited: (favorited: boolean) => void,
+    setFavoritesCount: (likes: number) => void
+}
+
+export const useFavoriteStore = create<FavoriteStore>(set => ({
+    favorited: true,
+    favoritesCount: 0,
+    setFavorited: (favorited) => set(() => ({favorited})),
+    setFavoritesCount: (likes: number) => set(() => ({favoritesCount: likes}))
+}))
+
 if (process.env.NODE_ENV === 'development')
     mountStoreDevtool('User Store', useUserStore)
 

@@ -1,35 +1,49 @@
 import { Button, Icon } from '@chakra-ui/react'
 import { AiFillHeart } from 'react-icons/ai'
-import { useNavigate } from 'react-router-dom'
-import { useUserStore } from '../store'
+import { useFavoriteStore, useUserStore } from '../store'
+import { useFavoriteArticle } from '../hooks/useFavoriteArticle'
+import { useUnfavoriteArticle } from '../hooks/useUnfavoriteArticle'
 
 interface Props {
-  likes: number
+  slug: string
   size: string
 }
 
-export const ButtonFav = ({ likes, size }: Props) => {
-  const { user } = useUserStore()
-  const navigate = useNavigate()
+export const ButtonFav = ({ slug, size }: Props) => {
+  const favorite = useFavoriteArticle()
+  const unfavorite = useUnfavoriteArticle()
 
-  const onFavorite = () => {
-    if (!user) {
-      navigate('/register')
+  const favorited = useFavoriteStore((s) => s.favorited)
+  const setFavorited = useFavoriteStore((s) => s.setFavorited)
+  const favoritesCount = useFavoriteStore((s) => s.favoritesCount)
+  const setFavoritesCount = useFavoriteStore((s) => s.setFavoritesCount)
+
+  const toggleFavorited = () => {
+    if (favorited) {
+      unfavorite.mutate(slug)
+      setFavorited(false)
+      setFavoritesCount(favoritesCount - 1)
+    } else {
+      favorite.mutate(slug)
+      setFavorited(true)
+      setFavoritesCount(favoritesCount + 1)
     }
   }
+
   return (
     <Button
-      onClick={() => onFavorite()}
-      variant='outline'
+      onClick={() => toggleFavorited()}
+      variant={favorited ? 'solid' : 'outline'}
       size={size}
-      color='#5CB85C'
+      bg={favorited ? '#5CB85C' : 'transparrent'}
+      color={favorited ? 'white' : '#5CB85C'}
       borderColor='#5CB85C'
       borderRadius='0.2rem'
       paddingX='0.5rem'
       _hover={{ bg: '#5CB85C', color: 'white' }}
     >
       <Icon mr={1} as={AiFillHeart} />
-      {likes}
+      {favorited ? `Unfavorite Article ${favoritesCount}` : `Favorite Article ${favoritesCount}`}
     </Button>
   )
 }

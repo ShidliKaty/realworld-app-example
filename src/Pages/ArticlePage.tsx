@@ -43,7 +43,7 @@ const ArticlePage = () => {
               <ArticleProfile color='white' article={data?.article} />
               <HStack spacing={1}>
                 <ButtonFollow color='#ccc' name={data.article.author.username} />
-                <ButtonFav size='sm' likes={data.article.favoritesCount} />
+                <ButtonFav size='sm' slug={slug!} />
               </HStack>
             </HStack>
           </VStack>
@@ -60,7 +60,7 @@ const ArticlePage = () => {
             <ArticleProfile color='#5CB85C' article={data?.article} />
             <HStack spacing={1}>
               <ButtonFollow color='#ccc' name={data.article.author.username} />
-              <ButtonFav size='sm' likes={data.article.favoritesCount} />
+              <ButtonFav size='sm' slug={slug!} />
             </HStack>
           </HStack>
           <Text textAlign='center' mb={5}>
