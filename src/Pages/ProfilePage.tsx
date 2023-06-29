@@ -2,7 +2,6 @@ import { Box, Container, Text, Image, Stack, Flex, Spinner } from '@chakra-ui/re
 import { useParams } from 'react-router-dom'
 import { useProfile } from '../hooks/useProfile'
 import { ButtonFollow } from '../components/ButtonFollow'
-import { PageButtons } from '../components/PageButtons'
 import { ProfileArticles } from '../components/ProfileArticles'
 
 const ProfilePage = () => {
@@ -32,7 +31,7 @@ const ProfilePage = () => {
             <ButtonFollow
               color='#999'
               name={data.profile.username}
-              following={data.profile.following}
+              isFollowing={data.profile.following}
             />
           </Flex>
         </Container>

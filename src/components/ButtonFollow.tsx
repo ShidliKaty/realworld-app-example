@@ -1,17 +1,31 @@
 import { Button, Text } from '@chakra-ui/react'
 import { useFollowProfile } from '../hooks/useFollowProfile'
+import { useUnfollowProfile } from '../hooks/useUnfollowProfile'
+import { useState } from 'react'
 interface Props {
   name: string
   color: string
-  following: boolean
+  isFollowing: boolean
 }
 
-export const ButtonFollow = ({ name, color, following }: Props) => {
+export const ButtonFollow = ({ name, color, isFollowing }: Props) => {
   const follow = useFollowProfile()
+  const unfollow = useUnfollowProfile()
 
+  const [following, setFollowing] = useState(isFollowing)
+
+  const toggleFollowing = () => {
+    if (following) {
+      unfollow.mutate(name)
+      setFollowing(false)
+    } else {
+      follow.mutate(name)
+      setFollowing(true)
+    }
+  }
   return (
     <Button
-      onClick={() => follow.mutate(name)}
+      onClick={() => toggleFollowing()}
       variant='outline'
       size='sm'
       color={color}
