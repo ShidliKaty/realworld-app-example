@@ -5,15 +5,12 @@ import { Tags } from "../entities/Tags";
 import { ArticleResponse, Articles } from "../entities/Articles";
 import { ArticlesFeedQuery, ArticlesQuery } from "../store";
 import { ProfileResponse } from "../entities/Profile";
-import { Comments } from "../entities/Comments";
-
+import { Comments, Comment } from "../entities/Comments";
+import { CommentRequest } from "../entities/CommentRequest";
 
 
 const client = axios.create({ baseURL: 'https://api.realworld.io/api' });
 
-
-
-const SESSION_EXPIRED_STATUS_CODE = 401;
 
 export const getUser = async () => {
     client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
@@ -40,7 +37,7 @@ export const getArticles = async (query: ArticlesQuery, username?: string) => {
     return response.data;
   };
 
-  export const getArticle = async (slug: string) => {
+export const getArticle = async (slug: string) => {
     const response = await client.get<ArticleResponse>('articles/' + slug, {
       params: {
         slug: slug
@@ -49,31 +46,50 @@ export const getArticles = async (query: ArticlesQuery, username?: string) => {
     return response.data;
   }
 
-  export const getArticlesFeed = async (query: ArticlesFeedQuery) => {
-    client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
-    const response = await client.get<Articles>('articles/feed', {
-      params: {
-        offset: (query.page - 1) * query.limit,
-        limit: query.limit,
-      }
-    });
-    return response.data;
-  };
+export const getArticlesFeed = async (query: ArticlesFeedQuery) => {
+  client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
+  const response = await client.get<Articles>('articles/feed', {
+    params: {
+      offset: (query.page - 1) * query.limit,
+      limit: query.limit,
+    }
+  });
+  return response.data;
+};
 
-  export const getProfile = async (name: string) => {
-    const response = await client.get<ProfileResponse>('profiles/' + name, {
-      params: {
-        username: name
-      }
-    });
-    return response.data;
+export const getProfile = async (name: string) => {
+  const response = await client.get<ProfileResponse>('profiles/' + name, {
+    params: {
+      username: name
+    }
+  });
+  return response.data;
   }
 
-  export const getComments = async (slug: string) => {
-    const response = await client.get<Comments>('articles/' + slug + '/comments', {
-      params: {
-        slug: slug
-      }
+export const getComments = async (slug: string) => {
+  const response = await client.get<Comments>('articles/' + slug + '/comments', {
+    params: {
+      slug: slug
+    }
+  });
+  return response.data;
+}
+
+export const postComment = async (slug: string, comment: CommentRequest) => {
+  const response = await client.post<Comment>('articles/' + slug + '/comments', comment, {
+    params: {
+      slug: slug
+    }
+  });
+  return response.data;
+}
+
+export const deleteComment = async (slug: string, id: number) => {
+  const response = await client.delete('articles/' + slug + '/comments/' + id, {
+    params: {
+      slug,
+      id
+    }
   });
   return response.data;
 }
@@ -117,3 +133,4 @@ export const unfavoriteArticle = async (slug: string) => {
   });
   return response.data;
 }
+
