@@ -1,5 +1,5 @@
 import { Stack, Input, Button, Text } from '@chakra-ui/react'
-import { FieldValues, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useLogIn } from '../hooks/useLogIn'
