@@ -8,7 +8,9 @@ interface Props {
 }
 
 export const DeleteCommentIcon = ({ commentId }: Props) => {
+  const newComment = useCommentsStore((s) => s.newComment)
   const deleteComment = useCommentsStore((s) => s.deleteComment)
+  const deleteNewComment = useCommentsStore((s) => s.deleteNewComment)
   const { slug } = useParams()
 
   const removeComment = useDeleteComment()
@@ -19,7 +21,9 @@ export const DeleteCommentIcon = ({ commentId }: Props) => {
       id: commentId,
     }
     removeComment.mutate(deleteData)
-    deleteComment(commentId)
+    if (newComment) {
+      deleteNewComment()
+    } else deleteComment(commentId)
   }
   return (
     <DeleteIcon

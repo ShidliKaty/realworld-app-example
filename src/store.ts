@@ -101,6 +101,7 @@ interface CommentsStore {
     setNewComment: (newComment: Comment) => void,
     setComments: (comments: Comment[]) => void,
     deleteComment: (id: number) => void,
+    deleteNewComment: () => void
 }
 
 export const useCommentsStore = create<CommentsStore>(set => ({
@@ -108,7 +109,8 @@ export const useCommentsStore = create<CommentsStore>(set => ({
     newComment: null,
     setNewComment: (newComment) => set(() => ({newComment})),
     setComments: (comments: Comment[]) => set(() => ({comments})),
-    deleteComment: (id: number) => set((store) => ({comments: store.comments.filter((comment) => comment.id !== id)}))
+    deleteComment: (id: number) => set((store) => ({comments: store.comments.filter((comment) => comment.id !== id)})),
+    deleteNewComment: () => set(() => ({newComment: null}))
 }))
 
 if (process.env.NODE_ENV === 'development')
