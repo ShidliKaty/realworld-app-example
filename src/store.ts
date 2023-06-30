@@ -1,5 +1,6 @@
 import { mountStoreDevtool } from 'simple-zustand-devtools';
 import {create} from 'zustand'
+import { Comment } from './entities/Comments';
 
 interface User {
     email?: string;
@@ -94,9 +95,27 @@ export const useFavoriteStore = create<FavoriteStore>(set => ({
     setFavorited: (favorited) => set(() => ({favorited})),
     setFavoritesCount: (likes: number) => set(() => ({favoritesCount: likes}))
 }))
+interface CommentsStore {
+    comments: Comment[],
+    newComment: Comment | null,
+    setNewComment: (newComment: Comment) => void,
+    setComments: (comments: Comment[]) => void,
+    deleteComment: (id: number) => void,
+}
+
+export const useCommentsStore = create<CommentsStore>(set => ({
+    comments: [],
+    newComment: null,
+    setNewComment: (newComment) => set(() => ({newComment})),
+    setComments: (comments: Comment[]) => set(() => ({comments})),
+    deleteComment: (id: number) => set((store) => ({comments: store.comments.filter((comment) => comment.id !== id)}))
+}))
 
 if (process.env.NODE_ENV === 'development')
     mountStoreDevtool('User Store', useUserStore)
 
 if (process.env.NODE_ENV === 'development')
     mountStoreDevtool('Articles Store', useArticlesQueryStore)
+
+if (process.env.NODE_ENV === 'development')
+    mountStoreDevtool('Comments Store', useCommentsStore)
