@@ -1,22 +1,11 @@
+import { Box, Text, Container, Spinner, Divider, HStack, VStack, Flex } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'
-import { Link as RouteLink } from 'react-router-dom'
 import { useArticle } from '../hooks/useArticle'
-import {
-  Box,
-  Text,
-  Container,
-  Spinner,
-  Divider,
-  HStack,
-  Link,
-  VStack,
-  Flex,
-} from '@chakra-ui/react'
 import { ArticleProfile } from '../components/ArticleProfile'
 import { Tags } from '../components/Tags'
 import { ButtonFollow } from '../components/ButtonFollow'
 import { ButtonFav } from '../components/ButtonFav'
-import { CommentsList } from '../components/CommentsList'
+import { CommentsBlock } from '../components/CommentsBlock'
 
 const ArticlePage = () => {
   const { slug } = useParams()
@@ -63,17 +52,7 @@ const ArticlePage = () => {
               <ButtonFav size='sm' slug={slug!} />
             </HStack>
           </HStack>
-          <Text textAlign='center' mb={5}>
-            <Link as={RouteLink} to='/login' color='#5CB85C'>
-              Sign in
-            </Link>{' '}
-            or{' '}
-            <Link as={RouteLink} to='/register' color='#5CB85C'>
-              sign up
-            </Link>{' '}
-            to add comments on this article.
-          </Text>
-          <CommentsList />
+          <CommentsBlock />
         </Container>
       </Box>
     </>
