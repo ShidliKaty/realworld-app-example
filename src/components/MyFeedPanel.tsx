@@ -1,7 +1,7 @@
 import { Stack, Text } from '@chakra-ui/react'
 import { ArticleCard } from './ArticleCard'
 import { useArticlesFeed } from '../hooks/useArticlesFeed'
-import { PageButtons } from './PageButtons'
+import { MyFeedPageButtons } from './MyFeedPageButtons'
 
 export const MyFeedPanel = () => {
   const { data: feed, isLoading: loading, error } = useArticlesFeed()
@@ -13,7 +13,7 @@ export const MyFeedPanel = () => {
       {feed?.articles?.map((article) => (
         <ArticleCard key={article.slug} article={article} />
       ))}
-      <PageButtons articlesCount={feed?.articlesCount} />
+      <MyFeedPageButtons articlesCount={feed?.articlesCount} />
     </Stack>
   )
 }

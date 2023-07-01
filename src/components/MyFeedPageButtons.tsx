@@ -1,14 +1,14 @@
 import { ButtonGroup } from '@chakra-ui/react'
-import { useArticlesQueryStore } from '../store'
+import { useArticlesFeedQueryStore } from '../store'
 import './PageButtons.css'
 
 interface Props {
   articlesCount: number | undefined
 }
 
-export const PageButtons = ({ articlesCount }: Props) => {
-  const setPage = useArticlesQueryStore((s) => s.setPage)
-  const page = useArticlesQueryStore((s) => s.articlesQuery.page)
+export const MyFeedPageButtons = ({ articlesCount }: Props) => {
+  const setPage = useArticlesFeedQueryStore((s) => s.setPage)
+  const page = useArticlesFeedQueryStore((s) => s.articlesFeedQuery.page)
 
   const pages = articlesCount ? Math.ceil(articlesCount / 10) : 0
 
