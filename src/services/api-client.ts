@@ -2,7 +2,7 @@ import axios from "axios";
 import { getToken } from "../hooks/useLocalStorage";
 import { UserResponse } from "../entities/UserResponses";
 import { Tags } from "../entities/Tags";
-import { ArticleResponse, Articles } from "../entities/Articles";
+import { ArticleResponse, Articles, NewArticleRequest } from "../entities/Articles";
 import { ArticlesFeedQuery, ArticlesQuery } from "../store";
 import { ProfileResponse } from "../entities/Profile";
 import { Comments, Comment } from "../entities/Comments";
@@ -66,14 +66,31 @@ export const getArticlesFeed = async (query: ArticlesFeedQuery) => {
   return response.data;
 };
 
-export const getProfile = async (name: string) => {
-  const response = await client.get<ProfileResponse>('profiles/' + name, {
+export const favoriteArticle = async (slug: string) => {
+  client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
+  const response = await client.post<ArticleResponse>('articles/' + slug + '/favorite', null, {
     params: {
-      username: name
+      slug: slug
     }
   });
   return response.data;
-  }
+}
+
+export const unfavoriteArticle = async (slug: string) => {
+  client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
+  const response = await client.delete<ArticleResponse>('articles/' + slug + '/favorite', {
+    params: {
+      slug: slug
+    }
+  });
+  return response.data;
+}
+
+export const postNewArticle = async (newArticle: NewArticleRequest) => {
+  client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
+  const response = await client.post<ArticleResponse>('articles', newArticle);
+  return response.data;
+}
 
 export const getComments = async (slug: string) => {
   const response = await client.get<Comments>('articles/' + slug + '/comments', {
@@ -85,6 +102,7 @@ export const getComments = async (slug: string) => {
 }
 
 export const postComment = async (slug: string, comment: CommentRequest) => {
+  client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
   const response = await client.post<Comment>('articles/' + slug + '/comments', comment, {
     params: {
       slug: slug
@@ -94,6 +112,7 @@ export const postComment = async (slug: string, comment: CommentRequest) => {
 }
 
 export const deleteComment = async (slug: string, id: number) => {
+  client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
   const response = await client.delete('articles/' + slug + '/comments/' + id, {
     params: {
       slug,
@@ -102,6 +121,15 @@ export const deleteComment = async (slug: string, id: number) => {
   });
   return response.data;
 }
+
+export const getProfile = async (name: string) => {
+  const response = await client.get<ProfileResponse>('profiles/' + name, {
+    params: {
+      username: name
+    }
+  });
+  return response.data;
+  }
 
 export const followProfile = async (username: string) => {
   client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
@@ -123,23 +151,5 @@ export const unfollowProfile = async (username: string) => {
   return response.data;
 }
 
-export const favoriteArticle = async (slug: string) => {
-  client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
-  const response = await client.post<ArticleResponse>('articles/' + slug + '/favorite', null, {
-    params: {
-      slug: slug
-    }
-  });
-  return response.data;
-}
 
-export const unfavoriteArticle = async (slug: string) => {
-  client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
-  const response = await client.delete<ArticleResponse>('articles/' + slug + '/favorite', {
-    params: {
-      slug: slug
-    }
-  });
-  return response.data;
-}
 

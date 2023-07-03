@@ -21,3 +21,14 @@ export interface Articles {
 export interface ArticleResponse {
     article: Article 
 }
+
+interface NewArticle {
+    title: string,
+    description: string,
+    body: string,
+    tagList: string[]
+}
+
+export interface NewArticleRequest {
+    article: NewArticle
+}
