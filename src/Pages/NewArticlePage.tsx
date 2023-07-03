@@ -1,14 +1,44 @@
-import { Button, Container, Input, Stack, Textarea } from '@chakra-ui/react'
+import { Button, Container, Input, Stack, Textarea, Text } from '@chakra-ui/react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const schema = z.object({
+  title: z.string().min(3, { message: 'Title must be at least 3 characters' }),
+  description: z.string().min(3, { message: 'Description must be at least 3 characters' }),
+  body: z.string().min(10, { message: 'Article must be at least 10 characters' }),
+  tags: z.string(),
+})
+
+type FormData = z.infer<typeof schema>
 
 const NewArticlePage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({ resolver: zodResolver(schema) })
   return (
     <Container minW='920px'>
       <Stack spacing={4} mx={'auto'} my={'24px'} align={'center'} minH='100vh' minW='100%'>
-        <Stack as={'form'} spacing={4} alignItems={'flex-end'} minW='100%'>
-          <Input size={'lg'} type='text' placeholder='Article Title' />
-          <Input type='text' placeholder="What's this article about?" />
-          <Textarea minH='200px' placeholder='Write your article (in markdown)' />
-          <Input type='text' placeholder='Enter tags' />
+        <Stack
+          as={'form'}
+          onSubmit={handleSubmit((data) => console.log(data))}
+          spacing={4}
+          alignItems={'flex-end'}
+          minW='100%'
+        >
+          {errors.title && <Text color={'red.600'}>{errors.title.message}</Text>}
+          <Input {...register('title')} size={'lg'} type='text' placeholder='Article Title' />
+          {errors.description && <Text color={'red.600'}>{errors.description.message}</Text>}
+          <Input
+            {...register('description')}
+            type='text'
+            placeholder="What's this article about?"
+          />
+          {errors.body && <Text color={'red.600'}>{errors.body.message}</Text>}
+          <Textarea {...register('body')} minH='200px' placeholder='Write your article' />
+          <Input {...register('tags')} type='text' placeholder='Enter tags' />
           <Button
             type={'submit'}
             bg={'#5CB85C'}
