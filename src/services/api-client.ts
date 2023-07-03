@@ -7,6 +7,7 @@ import { ArticlesFeedQuery, ArticlesQuery } from "../store";
 import { ProfileResponse } from "../entities/Profile";
 import { Comments, Comment } from "../entities/Comments";
 import { CommentRequest } from "../entities/CommentRequest";
+import { UpdateUserRequest } from "../entities/UpdateUserRequest";
 
 
 const client = axios.create({ baseURL: 'https://api.realworld.io/api' });
@@ -19,6 +20,14 @@ export const getUser = async () => {
     return response.data;
   
 }
+
+export const updateUser = async (user: UpdateUserRequest) => {
+    client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
+   
+    const response = await client.put<UserResponse>('user', user);
+    return response.data;
+}
+
 export const getTags = async () => {
     const response = await client.get<Tags>('tags');
     return response.data;
