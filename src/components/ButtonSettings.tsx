@@ -12,7 +12,9 @@ export const ButtonSettings = () => {
       to='/settings'
       float={'right'}
       color='#999'
+      borderRadius='0.2rem'
       fontSize='0.87rem'
+      _hover={{ bg: '#bbb', color: 'white' }}
     >
       <SettingsIcon mr={1} />
       Edit Profile Settings

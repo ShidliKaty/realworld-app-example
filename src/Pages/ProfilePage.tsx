@@ -3,9 +3,12 @@ import { useParams } from 'react-router-dom'
 import { useProfile } from '../hooks/useProfile'
 import { ButtonFollow } from '../components/ButtonFollow'
 import { ProfileArticles } from '../components/ProfileArticles'
+import { useUserStore } from '../store'
+import { ButtonSettings } from '../components/ButtonSettings'
 
 const ProfilePage = () => {
   const { name } = useParams()
+  const user = useUserStore((s) => s.user)
 
   const { data, isLoading, error } = useProfile(name!)
 
@@ -28,7 +31,11 @@ const ProfilePage = () => {
             </Text>
           </Stack>
           <Flex justifyContent='flex-end'>
-            <ButtonFollow color='#999' name={data.profile.username} />
+            {user && user.username === name ? (
+              <ButtonSettings />
+            ) : (
+              <ButtonFollow color='#999' name={data.profile.username} />
+            )}
           </Flex>
         </Container>
       </Box>

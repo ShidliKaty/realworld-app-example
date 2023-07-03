@@ -53,7 +53,7 @@ export const LoginLinks = () => {
       </li>
       <li style={{ listStyleType: 'none' }}>
         <Link
-          to='/user'
+          to={'/' + user?.username}
           as={NavLink}
           color='gray.500'
           _activeLink={{ fontWeight: 'bold', color: 'gray.700' }}
