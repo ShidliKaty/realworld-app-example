@@ -2,6 +2,7 @@ import { Button, Container, Input, Stack, Textarea, Text } from '@chakra-ui/reac
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNewArticle } from '../hooks/useNewArticle'
 
 const schema = z.object({
   title: z.string().min(3, { message: 'Title must be at least 3 characters' }),
@@ -13,17 +14,34 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 
 const NewArticlePage = () => {
+  const { mutate } = useNewArticle()
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) })
+
+  const onSubmit = (inputData: FormData) => {
+    const { title, description, body, tags } = inputData
+
+    const tagList = tags ? tags.replace(/ /g, '').split(',') : []
+
+    mutate({
+      article: {
+        title,
+        description,
+        body,
+        tagList,
+      },
+    })
+  }
+
   return (
     <Container minW='920px'>
       <Stack spacing={4} mx={'auto'} my={'24px'} align={'center'} minH='100vh' minW='100%'>
         <Stack
           as={'form'}
-          onSubmit={handleSubmit((data) => console.log(data))}
+          onSubmit={handleSubmit(onSubmit)}
           spacing={4}
           alignItems={'flex-end'}
           minW='100%'
