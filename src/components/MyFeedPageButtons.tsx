@@ -14,8 +14,6 @@ export const MyFeedPageButtons = ({ articlesCount }: Props) => {
 
   const list = Array.from({ length: pages }).map((v, i) => i + 1)
 
-  console.log(list)
-
   return (
     <ButtonGroup variant='outline' size='xs'>
       {list.map((i) => (

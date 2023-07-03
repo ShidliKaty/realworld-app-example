@@ -18,7 +18,6 @@ export const ProfileArticles = () => {
   const [tabIndex, setTabIndex] = useState(0)
 
   const handleTabsChange = (index: number) => {
-    console.log(index)
     setTabIndex(index)
     if (index === 0) {
       setFavorite(false)
