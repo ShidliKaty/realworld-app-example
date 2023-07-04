@@ -103,6 +103,17 @@ export const editArticle = async (editedArticle: NewArticleRequest, slug: string
     return response.data;
 }
 
+export const deleteArticle = async (slug: string) => {
+  client.defaults.headers.common['Authorization'] = `Token ${getToken('token')}`
+   
+    const response = await client.delete('articles/' + slug, {
+      params: {
+        slug: slug
+      }
+    });
+    return response.data;
+}
+
 export const getComments = async (slug: string) => {
   const response = await client.get<Comments>('articles/' + slug + '/comments', {
     params: {

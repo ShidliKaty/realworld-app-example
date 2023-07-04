@@ -38,7 +38,7 @@ const ArticlePage = () => {
                 {user && user.username === data.article.author.username ? (
                   <>
                     <ButtonEdit slug={slug!} />
-                    <ButtonDelete />
+                    <ButtonDelete slug={slug!} />
                   </>
                 ) : (
                   <>
