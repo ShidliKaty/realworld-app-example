@@ -7,6 +7,7 @@ import { ButtonFollow } from '../components/ButtonFollow'
 import { ButtonFav } from '../components/ButtonFav'
 import { CommentsBlock } from '../components/CommentsBlock'
 import { ButtonEdit } from '../components/ButtonEdit'
+import { ButtonDelete } from '../components/DeleteArticle'
 
 const ArticlePage = () => {
   const { slug } = useParams()
@@ -35,6 +36,7 @@ const ArticlePage = () => {
                 <ButtonFollow color='#ccc' name={data.article.author.username} />
                 <ButtonEdit />
                 <ButtonFav size='sm' slug={slug!} />
+                <ButtonDelete />
               </HStack>
             </HStack>
           </VStack>
