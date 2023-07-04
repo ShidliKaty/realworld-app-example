@@ -4,7 +4,7 @@ import { CommentRequest } from "../entities/CommentRequest";
 import { postComment } from "../services/api-client";
 import { useCommentsStore } from "../store";
 
-interface myVariables {
+interface Variables {
     slug: string,
     comment: CommentRequest
 }
@@ -12,8 +12,8 @@ interface myVariables {
 export const useAddComment = () => {
     const queryClient = useQueryClient()
     const setNewComment = useCommentsStore(s => s.setNewComment)
-    return useMutation<Comment, Error, myVariables, unknown>(
-        (variables: myVariables) => postComment(variables.slug, variables.comment), {
+    return useMutation<Comment, Error, Variables, unknown>(
+        (variables: Variables) => postComment(variables.slug, variables.comment), {
             onSuccess: (data) => {
                 setNewComment(data);
                 queryClient.invalidateQueries({

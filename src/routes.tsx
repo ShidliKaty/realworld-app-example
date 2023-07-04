@@ -8,6 +8,7 @@ import NewArticlePage from './Pages/NewArticlePage'
 import SettingsPage from './Pages/SettingsPage'
 import ProfilePage from './Pages/ProfilePage'
 import ArticlePage from './Pages/ArticlePage'
+import EditArticlePage from './Pages/EditArticlePage'
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ export const router = createBrowserRouter([
       { path: 'login', element: <SignInPage /> },
       { path: 'register', element: <SignUpPage /> },
       { path: 'editor', element: <NewArticlePage /> },
+      { path: 'editor/:slug', element: <EditArticlePage /> },
       { path: 'settings', element: <SettingsPage /> },
       { path: 'user', element: <ProfilePage /> },
       { path: 'article/:slug', element: <ArticlePage /> },

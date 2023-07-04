@@ -37,7 +37,7 @@ const ArticlePage = () => {
               <HStack spacing={1}>
                 {user && user.username === data.article.author.username ? (
                   <>
-                    <ButtonEdit />
+                    <ButtonEdit slug={slug!} />
                     <ButtonDelete />
                   </>
                 ) : (

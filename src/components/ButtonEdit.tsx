@@ -1,10 +1,16 @@
 import { EditIcon } from '@chakra-ui/icons'
 import { Button } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
-export const ButtonEdit = () => {
+interface Props {
+  slug: string
+}
+
+export const ButtonEdit = ({ slug }: Props) => {
+  const navigate = useNavigate()
   return (
     <Button
-      //   onClick={() => }
+      onClick={() => navigate('/editor/' + slug)}
       variant='outline'
       size='sm'
       color='#ccc'
