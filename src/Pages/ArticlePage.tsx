@@ -6,6 +6,7 @@ import { Tags } from '../components/Tags'
 import { ButtonFollow } from '../components/ButtonFollow'
 import { ButtonFav } from '../components/ButtonFav'
 import { CommentsBlock } from '../components/CommentsBlock'
+import { ButtonEdit } from '../components/ButtonEdit'
 
 const ArticlePage = () => {
   const { slug } = useParams()
@@ -32,6 +33,7 @@ const ArticlePage = () => {
               <ArticleProfile color='white' article={data?.article} />
               <HStack spacing={1}>
                 <ButtonFollow color='#ccc' name={data.article.author.username} />
+                <ButtonEdit />
                 <ButtonFav size='sm' slug={slug!} />
               </HStack>
             </HStack>
