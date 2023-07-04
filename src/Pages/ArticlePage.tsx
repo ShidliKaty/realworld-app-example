@@ -8,9 +8,11 @@ import { ButtonFav } from '../components/ButtonFav'
 import { CommentsBlock } from '../components/CommentsBlock'
 import { ButtonEdit } from '../components/ButtonEdit'
 import { ButtonDelete } from '../components/DeleteArticle'
+import { useUserStore } from '../store'
 
 const ArticlePage = () => {
   const { slug } = useParams()
+  const user = useUserStore((s) => s.user)
 
   const { data, isLoading, error } = useArticle(slug!)
 
@@ -33,10 +35,17 @@ const ArticlePage = () => {
             <HStack justifyContent='flex-start' mt={1} spacing={7}>
               <ArticleProfile color='white' article={data?.article} />
               <HStack spacing={1}>
-                <ButtonFollow color='#ccc' name={data.article.author.username} />
-                <ButtonEdit />
-                <ButtonFav size='sm' slug={slug!} />
-                <ButtonDelete />
+                {user && user.username === data.article.author.username ? (
+                  <>
+                    <ButtonEdit />
+                    <ButtonDelete />
+                  </>
+                ) : (
+                  <>
+                    <ButtonFollow color='#ccc' name={data.article.author.username} />
+                    <ButtonFav size='sm' slug={slug!} />
+                  </>
+                )}
               </HStack>
             </HStack>
           </VStack>

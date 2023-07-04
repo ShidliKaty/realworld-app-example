@@ -3,6 +3,7 @@ import { AiFillHeart } from 'react-icons/ai'
 import { useFavoriteStore, useUserStore } from '../store'
 import { useFavoriteArticle } from '../hooks/useFavoriteArticle'
 import { useUnfavoriteArticle } from '../hooks/useUnfavoriteArticle'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   slug: string
@@ -10,6 +11,9 @@ interface Props {
 }
 
 export const ButtonFav = ({ slug, size }: Props) => {
+  const user = useUserStore((s) => s.user)
+  const navigate = useNavigate()
+
   const favorite = useFavoriteArticle()
   const unfavorite = useUnfavoriteArticle()
 
@@ -19,6 +23,10 @@ export const ButtonFav = ({ slug, size }: Props) => {
   const setFavoritesCount = useFavoriteStore((s) => s.setFavoritesCount)
 
   const toggleFavorited = () => {
+    if (!user) {
+      navigate('/login')
+      return
+    }
     if (favorited) {
       unfavorite.mutate(slug)
       setFavorited(false)
