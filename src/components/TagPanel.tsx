@@ -6,7 +6,6 @@ import { PageButtons } from './PageButtons'
 export const TagPanel = () => {
   const { data, isLoading } = useArticles()
 
-  console.log(data)
   return (
     <Stack spacing={5}>
       {isLoading && <Text>Loading articles...</Text>}

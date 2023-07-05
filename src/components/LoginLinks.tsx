@@ -53,6 +53,7 @@ export const LoginLinks = () => {
       </li>
       <li style={{ listStyleType: 'none' }}>
         <Link
+          onClick={() => setArticlesQuery()}
           to={'/' + user?.username}
           as={NavLink}
           color='gray.500'

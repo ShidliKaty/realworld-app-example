@@ -12,7 +12,7 @@ export const CommentsList = () => {
   return (
     <Stack alignItems='center' justifyContent='center'>
       {isLoading && <Spinner />}
-      {(!data || data.comments.length === 0) && <Text>No comments...</Text>}
+      {/* {(!data || data.comments.length === 0) && !newComment && <Text>No comments...</Text>} */}
       {newComment ? <CommentCard comment={newComment.comment} /> : null}
       {comments.map((comment) => (
         <CommentCard key={comment.id} comment={comment} />

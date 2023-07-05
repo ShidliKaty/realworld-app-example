@@ -3,7 +3,7 @@ import { useArticles } from '../hooks/useArticles'
 import { ArticleCard } from './ArticleCard'
 import { useParams } from 'react-router-dom'
 import { useArticlesQueryStore } from '../store'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { PageButtons } from './PageButtons'
 
 export const ProfileArticles = () => {
@@ -16,6 +16,19 @@ export const ProfileArticles = () => {
   const deleteUsername = useArticlesQueryStore((s) => s.deleteUsername)
 
   const [tabIndex, setTabIndex] = useState(0)
+
+  console.log(tabIndex)
+
+  useEffect(() => {
+    if (tabIndex === 0) {
+      setFavorite(false)
+      deleteUsername()
+    }
+    if (tabIndex === 1) {
+      setFavorite(true)
+      setUsername(name!)
+    }
+  }, [name])
 
   const handleTabsChange = (index: number) => {
     setTabIndex(index)
