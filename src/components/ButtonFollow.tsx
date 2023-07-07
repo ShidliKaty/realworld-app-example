@@ -31,6 +31,19 @@ export const ButtonFollow = ({ name, color }: Props) => {
       setFollowing(true)
     }
   }
+
+  const buttonText = () => {
+    if (!user) {
+      return `Follow ${name}`
+    }
+    if (user && following) {
+      return `Unfollow ${name}`
+    }
+    if (user && !following) {
+      return `Follow ${name}`
+    }
+  }
+
   return (
     <Button
       onClick={() => toggleFollowing()}
@@ -45,7 +58,7 @@ export const ButtonFollow = ({ name, color }: Props) => {
       <Text fontSize='1.2rem' mr={2} textAlign='center' pb='2px'>
         +
       </Text>
-      {following ? `Unfollow ${name}` : `Follow ${name}`}
+      {buttonText()}
     </Button>
   )
 }
