@@ -95,7 +95,7 @@ const SignUpForm = () => {
         id='confirmPassword'
         variant='outline'
         size={'lg'}
-        type='text'
+        type='password'
         placeholder='Confirm password'
       />
       {errors.confirmPassword && <Text color={'red.600'}>{errors.confirmPassword.message}</Text>}

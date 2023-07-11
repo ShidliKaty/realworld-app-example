@@ -13,6 +13,9 @@ interface Props {
 }
 
 export const ButtonLikes = ({ slug, likes, isFavorited }: Props) => {
+  const user = useUserStore((s) => s.user)
+  const navigate = useNavigate()
+
   const favorite = useFavoriteArticle()
   const unfavorite = useUnfavoriteArticle()
 
@@ -20,6 +23,11 @@ export const ButtonLikes = ({ slug, likes, isFavorited }: Props) => {
   const [favoritesCount, setFavoritesCount] = useState(likes)
 
   const toggleFavorited = () => {
+    if (!user) {
+      navigate('/login')
+      return
+    }
+
     if (favorited) {
       unfavorite.mutate(slug)
       setFavorited(false)
